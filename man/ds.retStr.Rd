@@ -109,7 +109,7 @@ Server function called: \code{retStrDS}.
 
 }
 \author{
-DataSHIELD Development Team
+Soumya Banerjee, 2020
 
 DataSHIELD Development Team
 }
