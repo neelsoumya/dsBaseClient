@@ -59,8 +59,7 @@ ds.retStr <- function(search.filter=NULL, datasources=NULL)
 
    # call the server side function
    cat("On client side: \n")
-   transmit.object.final = search.filter
-   calltext <- call("retStrDS",search.filter=transmit.object.final)
+   calltext <- call("retStrDS",search.filter=search.filter)
 
    cat("\n Class of calltext\n")
    cat(class(calltext))
