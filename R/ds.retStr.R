@@ -7,9 +7,6 @@
 #' @param search.filter character string (potentially including \code{*} symbol without spaces) 
 #' specifying the string that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
-#' @param datasources a list of \code{\link{DSConnection-class}} 
-#' objects obtained after login. If the \code{datasources} argument is not specified
-#' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @return \code{ds.retStr} returns to the client-side a string
 #' @author Soumya Banerjee, 2020
 #' @examples
@@ -47,7 +44,7 @@
 #' }
 #'
 #' @export
-ds.retStr <- function(search.filter=NULL, datasources=NULL)
+ds.retStr <- function(search.filter=NULL)
 {
   
    if(is.null(datasources))
