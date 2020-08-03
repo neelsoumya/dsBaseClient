@@ -47,10 +47,7 @@
 ds.retStr <- function(search.filter=NULL)
 {
   
-   if(is.null(datasources))
-   {
-   	 datasources <- datashield.connections_find()
-   }
+   datasources <- datashield.connections_find()
 
    # call the server side function
    cat("On client side: \n")
