@@ -9,12 +9,6 @@
 #' @param env.to.search an integer (e.g. in \code{2} or \code{2L} format) specifying the position
 #' in the search path of the environment to be explored. \code{1L} is the current active analytic
 #' environment on the server-side and is the default value of \code{env.to.search}.
-#' For more information see \strong{Details}.
-#' @param search.GlobalEnv Logical. If TRUE, \code{ds.ls} will list all objects
-#' in the \code{.GlobalEnv} R environment on the server-side. If FALSE and if \code{env.to.search} is also
-#' set as a valid integer, \code{ds.ls} will list all objects in the server-side R environment
-#' identified by \code{env.to.search} in the search path. 
-#' For more information see \strong{Details}.
 #' @param datasources a list of \code{\link{DSConnection-class}} 
 #' objects obtained after login. If the \code{datasources} argument is not specified
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
@@ -56,7 +50,7 @@
 #' }
 #'
 #' @export
-ds.retStr <- function(search.filter=NULL, env.to.search=1L, search.GlobalEnv=TRUE, datasources=NULL)
+ds.retStr <- function(search.filter=NULL, env.to.search=1L, datasources=NULL)
 {
   
    if(is.null(datasources))
@@ -64,12 +58,8 @@ ds.retStr <- function(search.filter=NULL, env.to.search=1L, search.GlobalEnv=TRU
    	 datasources <- datashield.connections_find()
    }
 
-   #make default to .GlobalEnv unambiguous
 
-   if(search.GlobalEnv||is.null(env.to.search))
-   {
-	env.to.search<-1L
-   }
+   env.to.search<-1L
 
 	 
 
