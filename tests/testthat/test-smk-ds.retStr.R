@@ -27,6 +27,8 @@ test_that("setup", {
 context("ds.dim::smk")
 test_that("simple dim, both", {
     dim.res <- ds.retStr('thisishello')
+    
+    expect_match(string, 'hello', ignore.case = TRUE)
 
 })
 
