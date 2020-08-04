@@ -34,10 +34,9 @@ test_that("simple dim, both", {
 
 context("ds.dim::smk")
 test_that("simple dim, split", {
-    dim.res <- ds.dim('D', type='split')
-
-    expect_length(dim.res, 3)
-    expect_length(dim.res$`dimensions of D in sim1`, 2)
+    dim.res <- ds.retStr('1234')
+    
+    expect_match(as.character(dim.res), '123', ignore.case = TRUE)
 })
 
 context("ds.dim::smk")
