@@ -41,10 +41,9 @@ test_that("simple dim, split", {
 
 context("ds.dim::smk")
 test_that("simple dim, combine", {
-    dim.res <- ds.dim('D', type='combine')
-
-    expect_length(dim.res, 1)
-    expect_length(dim.res$`dimensions of D in combined studies`, 2)
+    dim.res <- ds.retStr('$')
+    
+    expect_match(as.character(dim.res), '$', ignore.case = TRUE)
 })
 
 #
