@@ -26,12 +26,8 @@ test_that("setup", {
 
 context("ds.dim::smk")
 test_that("simple dim, both", {
-    dim.res <- ds.dim('D', type='both')
+    dim.res <- ds.retStr('thisishello')
 
-    expect_length(dim.res, 4)
-    expect_length(dim.res$`dimensions of D in sim1`, 2)
-    expect_equal(dim.res$`dimensions of D in combined studies`[[1]], 9379)
-    expect_equal(dim.res$`dimensions of D in combined studies`[[2]], 1)
 })
 
 context("ds.dim::smk")
@@ -40,8 +36,6 @@ test_that("simple dim, split", {
 
     expect_length(dim.res, 3)
     expect_length(dim.res$`dimensions of D in sim1`, 2)
-    expect_equal(dim.res$`dimensions of D in sim1`[[1]], 2163)
-    expect_equal(dim.res$`dimensions of D in sim3`[[2]], 1)
 })
 
 context("ds.dim::smk")
@@ -50,8 +44,6 @@ test_that("simple dim, combine", {
 
     expect_length(dim.res, 1)
     expect_length(dim.res$`dimensions of D in combined studies`, 2)
-    expect_equal(dim.res$`dimensions of D in combined studies`[[1]], 9379)
-    expect_equal(dim.res$`dimensions of D in combined studies`[[2]], 1)
 })
 
 #
