@@ -46,12 +46,13 @@ test_that("simple dim, combine", {
     expect_match(as.character(dim.res), '$', ignore.case = TRUE)
 })
 
+# testthat::expect_error( as.character(ds.retStr('1==1') )
+              
 #context("ds.dim::smk")
 #test_that("simple dim, SQL injection", {
-#    # dim.res <- ds.retStr('1==1')
     
-#    # expect_match(as.character(dim.res), 'error', ignore.case = TRUE)
-#    TODO: use expect_error()
+#    dim.res <- ds.retStr('1==1')
+    
 #    expect_error( as.character(ds.retStr('1==1') )
 #})
 
