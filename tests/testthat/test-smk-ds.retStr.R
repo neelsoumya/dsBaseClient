@@ -12,7 +12,7 @@
 # Set up
 #
 
-context("ds.dim::smk::setup")
+context("ds.retStr::smk::setup")
 
 connect.studies.dataset.cnsim(list("LAB_TSC"))
 
@@ -24,7 +24,7 @@ test_that("setup", {
 # Tests
 #
 
-context("ds.dim::smk")
+context("ds.retStr::smk")
 test_that("simple dim, both", {
     dim.res <- ds.retStr('thisishello')
     
@@ -32,29 +32,34 @@ test_that("simple dim, both", {
 
 })
 
-context("ds.dim::smk")
+context("ds.retStr::smk")
 test_that("simple dim, split", {
     dim.res <- ds.retStr('1234')
     
     expect_match(as.character(dim.res), '123', ignore.case = TRUE)
 })
 
-context("ds.dim::smk")
+context("ds.retStr::smk")
 test_that("simple dim, combine", {
     dim.res <- ds.retStr('$')
     
     expect_match(as.character(dim.res), '$', ignore.case = TRUE)
 })
 
-# testthat::expect_error( as.character(ds.retStr('1==1') )
+# testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
-#context("ds.dim::smk")
-#test_that("simple dim, SQL injection", {
+context("ds.retStr::smk")
+test_that("simple dim, SQL injection", {
     
-#    dim.res <- ds.retStr('1==1')
+    expect_error( as.character(ds.retStr('1==1') ) )
+})
+
+context("ds.retStr::smk")
+test_that("space in string", {
     
-#    expect_error( as.character(ds.retStr('1==1') )
-#})
+    expect_error( as.character(ds.retStr('he llo') ) )
+})
+
 
 #
 # Done
