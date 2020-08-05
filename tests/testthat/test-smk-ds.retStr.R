@@ -25,7 +25,7 @@ test_that("setup", {
 #
 
 context("ds.retStr::smk")
-test_that("simple dim, both", {
+test_that("simple ds.retStr call", {
     dim.res <- ds.retStr('thisishello')
     
     expect_match(as.character(dim.res), 'hello', ignore.case = TRUE)
@@ -33,14 +33,14 @@ test_that("simple dim, both", {
 })
 
 context("ds.retStr::smk")
-test_that("simple dim, split", {
+test_that("simple call", {
     dim.res <- ds.retStr('1234')
     
     expect_match(as.character(dim.res), '123', ignore.case = TRUE)
 })
 
 context("ds.retStr::smk")
-test_that("simple dim, combine", {
+test_that("simple call with special character", {
     dim.res <- ds.retStr('$')
     
     expect_match(as.character(dim.res), '$', ignore.case = TRUE)
@@ -49,13 +49,13 @@ test_that("simple dim, combine", {
 # testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
 context("ds.retStr::smk")
-test_that("simple dim, SQL injection", {
+test_that("simple error, SQL injection", {
     
     expect_error( as.character(ds.retStr('1==1') ) )
 })
 
 context("ds.retStr::smk")
-test_that("space in string", {
+test_that("space in string error", {
     
     expect_error( as.character(ds.retStr('he llo') ) )
 })
