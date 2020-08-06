@@ -61,6 +61,14 @@ test_that("space in string error", {
 })
 
 
+context("ds.retStr::smk")
+test_that("alphanumeric characters", {
+    
+    expect_error( as.character(ds.retStr('$@12 == 3') ) )
+})
+
+
+
 #
 # Done
 #
