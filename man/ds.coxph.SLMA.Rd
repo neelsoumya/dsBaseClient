@@ -4,12 +4,14 @@
 \alias{ds.coxph.SLMA}
 \title{Passes a string to a server-side environment}
 \usage{
-ds.coxph.SLMA(search.filter = NULL)
+ds.coxph.SLMA(search.filter = NULL, dataName = NULL)
 }
 \arguments{
 \item{search.filter}{character string (potentially including \code{*} symbol without spaces) 
 specifying the string that you want to pass to the server-side.
 For more information see \strong{Details}.}
+
+\item{dataName}{character string of name of data frame}
 }
 \value{
 \code{ds.retStr} returns to the client-side a string

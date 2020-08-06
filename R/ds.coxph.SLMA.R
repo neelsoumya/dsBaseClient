@@ -7,6 +7,7 @@
 #' @param search.filter character string (potentially including \code{*} symbol without spaces) 
 #' specifying the string that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
+#' @param dataName character string of name of data frame
 #' @return \code{ds.retStr} returns to the client-side a string
 #' @author Soumya Banerjee, 2020
 #' @examples
@@ -44,7 +45,7 @@
 #' }
 #'
 #' @export
-ds.coxph.SLMA <- function(search.filter=NULL)
+ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
 {
   
    datasources <- datashield.connections_find()
@@ -52,7 +53,7 @@ ds.coxph.SLMA <- function(search.filter=NULL)
    # call the server side function
    cat("On client side: \n")
    # calltext <- call("retStrDS",search.filter=search.filter)
-   calltext <- call("coxphSLMADS",search.filter=search.filter)
+   calltext <- call("coxphSLMADS",search.filter=search.filter, dataName)
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
