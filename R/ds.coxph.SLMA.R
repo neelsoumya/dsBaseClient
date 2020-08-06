@@ -53,6 +53,7 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    # call the server side function
    cat("On client side: \n")
    # calltext <- call("retStrDS",search.filter=search.filter)
+   # search.filter=stats::as.formula(search.filter)
    calltext <- call("coxphSLMADS",search.filter=search.filter, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
