@@ -2,27 +2,27 @@
 % Please edit documentation in R/ds.coxph.SLMA.R
 \name{ds.coxph.SLMA}
 \alias{ds.coxph.SLMA}
-\title{Passes a string to a server-side environment}
+\title{Performs survival analysis using Cox proportional hazards model}
 \usage{
 ds.coxph.SLMA(search.filter = NULL, dataName = NULL)
 }
 \arguments{
 \item{search.filter}{character string (potentially including \code{*} symbol without spaces) 
-specifying the string that you want to pass to the server-side.
+specifying the formula that you want to pass to the server-side.
 For more information see \strong{Details}.}
 
 \item{dataName}{character string of name of data frame}
 }
 \value{
-\code{ds.retStr} returns to the client-side a string
+\code{coxphSLMADS} returns to the client-side a summary of the Cox proportional hazards model
 }
 \description{
-Passes a string to a server side environment and prints the string returned from the server.
+Passes a formula to a server side environment and returns the summary of Cox proportional hazards model from the server.
 }
 \details{
-This is a function to test writing new functions and the communication between the client and the server. 
+This is a function that peforms survival analysis using the Cox proportional hazards model. 
 
-Server function called: \code{retStrDS}.
+Server function called: \code{coxphSLMADS}.
 }
 \examples{
 \dontrun{
@@ -39,20 +39,29 @@ Server function called: \code{retStrDS}.
   builder$append(server = "study1", 
                  url = "http://192.168.56.100:8080/", 
                  user = "administrator", password = "datashield_test&", 
-                 table = "CNSIM.CNSIM1", driver = "OpalDriver")
+                 table = "SURVIVAL.EXPAND_NO_MISSING1", driver = "OpalDriver")
   builder$append(server = "study2", 
                  url = "http://192.168.56.100:8080/", 
                  user = "administrator", password = "datashield_test&", 
-                 table = "CNSIM.CNSIM2", driver = "OpalDriver")
+                 table = "SURVIVAL.EXPAND_NO_MISSING2", driver = "OpalDriver")
   builder$append(server = "study3",
                  url = "http://192.168.56.100:8080/", 
                  user = "administrator", password = "datashield_test&", 
-                 table = "CNSIM.CNSIM3", driver = "OpalDriver")
+                 table = "SURVIVAL.EXPAND_NO_MISSING3", driver = "OpalDriver")
   logindata <- builder$build()
   
   connections <- DSI::datashield.login(logins = logindata, assign = TRUE, symbol = "D") 
   
-  ds.retStr('hello')
+  # make sure that the outcome is numeric 
+  ds.asNumeric(x.name = "D$cens",
+            newobj = "EVENT",
+            datasources = connections)
+
+  ds.asNumeric(x.name = "D$survtime",
+            newobj = "SURVTIME",
+            datasources = connections)
+
+  dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', dataName = 'D')
   
   # clear the Datashield R sessions and logout
   datashield.logout(connections)

@@ -61,7 +61,26 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
 
    # call the server side function
    cat("On client side: \n")
-   # search.filter=stats::as.formula(search.filter)
+   search.filter=stats::as.formula(search.filter)
+   
+   # TODO: fix later
+   formula = search.filter
+   
+   #formula as text, then split at pipes to avoid triggering parser
+   formula <- Reduce(paste, deparse(formula))
+   formula <- gsub("|", "xxx", formula, fixed = TRUE)
+   formula <- gsub("(", "yyy", formula, fixed = TRUE)
+   formula <- gsub(")", "zzz", formula, fixed = TRUE)
+   formula <- gsub("/", "ppp", formula, fixed = TRUE)
+   formula <- gsub(":", "qqq", formula, fixed = TRUE)
+   formula <- gsub(",", "rrr", formula, fixed = TRUE)
+   formula <- gsub(" ", "", formula, fixed = TRUE)
+   formula <- stats::as.formula(formula)
+   #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
+   
+   # TODO: fix later
+   search.filter = formula
+   
    calltext <- call("coxphSLMADS",search.filter=search.filter, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
