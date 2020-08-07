@@ -1,6 +1,8 @@
 #' @title Performs survival analysis using Cox proportional hazards model
-#' @description Passes a formula to a server side environment and returns the summary of Cox proportional hazards model from the server. 
-#' @details This is a function that peforms survival analysis using the Cox proportional hazards model. 
+#' @description Passes a formula to a server side environment and returns the summary of 
+#' Cox proportional hazards model from the server. 
+#' @details This is a function that performs survival analysis using the Cox 
+#' proportional hazards model. 
 #' 
 #' Server function called: \code{coxphSLMADS}. 
 #' 
@@ -8,7 +10,8 @@
 #' specifying the formula that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
 #' @param dataName character string of name of data frame
-#' @return \code{coxphSLMADS} returns to the client-side a summary of the Cox proportional hazards model
+#' @return \code{coxphSLMADS} returns to the client-side a summary of 
+#' the Cox proportional hazards model
 #' @author Soumya Banerjee, 2020
 #' @examples
 #' \dontrun{
@@ -47,7 +50,8 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', dataName = 'D')
+#'   dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+#'             dataName = 'D')
 #'   
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(connections)
@@ -68,19 +72,26 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    
    #formula as text, then split at pipes to avoid triggering parser
    formula <- Reduce(paste, deparse(formula))
+   formula <- gsub("survival::Surv(", "spppp", formula, fixed = TRUE)
    formula <- gsub("|", "xxx", formula, fixed = TRUE)
    formula <- gsub("(", "yyy", formula, fixed = TRUE)
    formula <- gsub(")", "zzz", formula, fixed = TRUE)
    formula <- gsub("/", "ppp", formula, fixed = TRUE)
    formula <- gsub(":", "qqq", formula, fixed = TRUE)
    formula <- gsub(",", "rrr", formula, fixed = TRUE)
-   formula <- gsub(" ", "", formula, fixed = TRUE)
+   formula <- gsub(" ", "",    formula, fixed = TRUE)
+   formula <- gsub("=", "lll", formula, fixed = TRUE)
+   # TODO: fix later this has been commented
+   # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
+   # gets converted to EVENTzzz ~ D$female
+   cat(formula)
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
    
    # TODO: fix later
    search.filter = formula
-   
+   #cat(search.filter)
+   cat("\n")
    calltext <- call("coxphSLMADS",search.filter=search.filter, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    

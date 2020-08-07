@@ -14,13 +14,16 @@ For more information see \strong{Details}.}
 \item{dataName}{character string of name of data frame}
 }
 \value{
-\code{coxphSLMADS} returns to the client-side a summary of the Cox proportional hazards model
+\code{coxphSLMADS} returns to the client-side a summary of 
+the Cox proportional hazards model
 }
 \description{
-Passes a formula to a server side environment and returns the summary of Cox proportional hazards model from the server.
+Passes a formula to a server side environment and returns the summary of 
+Cox proportional hazards model from the server.
 }
 \details{
-This is a function that peforms survival analysis using the Cox proportional hazards model. 
+This is a function that performs survival analysis using the Cox 
+proportional hazards model. 
 
 Server function called: \code{coxphSLMADS}.
 }
@@ -61,7 +64,8 @@ Server function called: \code{coxphSLMADS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', dataName = 'D')
+  dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+            dataName = 'D')
   
   # clear the Datashield R sessions and logout
   datashield.logout(connections)
