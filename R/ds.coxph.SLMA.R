@@ -1,6 +1,6 @@
 #' @title Performs survival analysis using Cox proportional hazards model
 #' @description Passes a formula to a server side environment and returns the summary of Cox proportional hazards model from the server. 
-#' @details This is a function peform survival analysis using the Cox proportional hazards model. 
+#' @details This is a function that peforms survival analysis using the Cox proportional hazards model. 
 #' 
 #' Server function called: \code{coxphSLMADS}. 
 #' 
@@ -25,20 +25,29 @@
 #'   builder$append(server = "study1", 
 #'                  url = "http://192.168.56.100:8080/", 
 #'                  user = "administrator", password = "datashield_test&", 
-#'                  table = "CNSIM.CNSIM1", driver = "OpalDriver")
+#'                  table = "SURVIVAL.EXPAND_NO_MISSING1", driver = "OpalDriver")
 #'   builder$append(server = "study2", 
 #'                  url = "http://192.168.56.100:8080/", 
 #'                  user = "administrator", password = "datashield_test&", 
-#'                  table = "CNSIM.CNSIM2", driver = "OpalDriver")
+#'                  table = "SURVIVAL.EXPAND_NO_MISSING2", driver = "OpalDriver")
 #'   builder$append(server = "study3",
 #'                  url = "http://192.168.56.100:8080/", 
 #'                  user = "administrator", password = "datashield_test&", 
-#'                  table = "CNSIM.CNSIM3", driver = "OpalDriver")
+#'                  table = "SURVIVAL.EXPAND_NO_MISSING3", driver = "OpalDriver")
 #'   logindata <- builder$build()
 #'   
 #'   connections <- DSI::datashield.login(logins = logindata, assign = TRUE, symbol = "D") 
 #'   
-#'   ds.retStr('hello')
+#'   # make sure that the outcome is numeric 
+#'   ds.asNumeric(x.name = "D$cens",
+#'             newobj = "EVENT",
+#'             datasources = connections)
+#'
+#'   ds.asNumeric(x.name = "D$survtime",
+#'             newobj = "SURVTIME",
+#'             datasources = connections)
+#'
+#'   dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', dataName = 'D')
 #'   
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(connections)
