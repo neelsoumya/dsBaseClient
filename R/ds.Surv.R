@@ -89,37 +89,12 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
    
    # call the server side function
    cat("On client side: \n")
-   #search.filter=stats::as.formula(search.filter)
-   formula = stats::as.formula(formula)
-
-   # Logic for parsing formula: since this need to be passed
-   #     to parser, we need to remove special symbols
-   #     On the server-side function (coxphSLMADS) this needs
-   #     to be reconstructed
-   #formula as text, then split at pipes to avoid triggering parser
-   formula <- Reduce(paste, deparse(formula))
-   formula <- gsub("survival::Surv(", "sssss", formula, fixed = TRUE)
-   formula <- gsub("|", "xxx", formula, fixed = TRUE)
-   formula <- gsub("(", "yyy", formula, fixed = TRUE)
-   formula <- gsub(")", "zzz", formula, fixed = TRUE)
-   formula <- gsub("/", "ppp", formula, fixed = TRUE)
-   formula <- gsub(":", "qqq", formula, fixed = TRUE)
-   formula <- gsub(",", "rrr", formula, fixed = TRUE)
-   formula <- gsub(" ", "",    formula, fixed = TRUE)
-   formula <- gsub("=", "lll", formula, fixed = TRUE)
-   # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
-   # gets converted to EVENTzzz ~ D$female
-   cat(formula)
-   # convert to formula otherwise we get parser error
-   formula <- stats::as.formula(formula)
-   #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
-   
-   # TODO: fix later
-   #search.filter = formula
-   #cat(search.filter)
+   search.filter = formula
+   cat(search.filter)
    cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName)
-   # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
+   # calltext <- call("coxphSLMADS", formula=formula, dataName)
+   calltext <- call("SurvDS", formula=formula, dataName)
+   # datashield.assign()
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
@@ -128,9 +103,16 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
    cat("\n End of function \n")	
 
    # call aggregate function
-   output <- datashield.aggregate(datasources, calltext)
-  
+   # output <- datashield.aggregate(datasources, calltext)
+   # output <- datashield.assign(datasources, calltext, 'surv_object') 
+   # ds.assign(toAssign = calltext, newobj = 'surv_object', datasources = datasources)
+   output <- datashield.assign(conns = datasources, symbol = 'surv_object',
+                               value = calltext)
+   #ds.assign(toAssign = 'D$female', newobj = 'E', datasources = connections)
+   # ds.assign(toAssign = 'D$female', newobj = 'surv_object', datasources = datasources)
+   #ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
    # return summary of coxph model
+   output <- NULL
    return(output)
 	
 }
