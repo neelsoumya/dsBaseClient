@@ -78,7 +78,7 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
       # defined <- isDefined(datasources, dataName)
    }
    
-   
+   # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
    
    # verify that 'formula' was set
    if(is.null(formula))
