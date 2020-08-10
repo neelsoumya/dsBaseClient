@@ -6,9 +6,12 @@
 #' 
 #' Server function called: \code{coxphSLMADS}. 
 #' 
-#' @param search.filter character string (potentially including \code{*} symbol without spaces) 
+#' @param formula character string (potentially including \code{*} symbol without spaces) 
 #' specifying the formula that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
+#' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
+#' If the \code{datasources} argument is not specified
+#' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @param dataName character string of name of data frame
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
@@ -50,25 +53,44 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
-#'             dataName = 'D')
+#'   dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+#'             dataName = 'D', datasources = connections)
 #'   
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(connections)
 #' }
 #'
 #' @export
-ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
+ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
 {
-  
-   datasources <- datashield.connections_find()
-
+   
+   # look for DS connections
+   # if one not provided then get current
+   if(is.null(datasources))
+   {
+      datasources <- datashield.connections_find()
+   }
+   
+   # if the argument 'dataName' is set, check that the data frame is defined (i.e. exists) on the server site
+   if(!(is.null(dataName)))
+   {
+      # TODO: cannot find function isDefined but is is inds.glmerSLMA
+      # defined <- isDefined(datasources, dataName)
+   }
+   
+   # verify that 'formula' was set
+   if(is.null(formula))
+   {
+      stop(" Please provide a valid survival formula!", call.=FALSE)
+   }
+   
+   
    # call the server side function
    cat("On client side: \n")
-   search.filter=stats::as.formula(search.filter)
-   
+   #search.filter=stats::as.formula(search.filter)
+   formula = stats::as.formula(formula)
    # TODO: fix later
-   formula = search.filter
+   #formula = search.filter
    
    # Logic for parsing formula: since this need to be passed
    #     to parser, we need to remove special symbols
@@ -76,7 +98,7 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    #     to be reconstructed
    #formula as text, then split at pipes to avoid triggering parser
    formula <- Reduce(paste, deparse(formula))
-   formula <- gsub("survival::Surv(", "spppp", formula, fixed = TRUE)
+   formula <- gsub("survival::Surv(", "sssss", formula, fixed = TRUE)
    formula <- gsub("|", "xxx", formula, fixed = TRUE)
    formula <- gsub("(", "yyy", formula, fixed = TRUE)
    formula <- gsub(")", "zzz", formula, fixed = TRUE)
@@ -93,10 +115,10 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
    
    # TODO: fix later
-   search.filter = formula
+   #search.filter = formula
    #cat(search.filter)
    cat("\n")
-   calltext <- call("coxphSLMADS",search.filter=search.filter, dataName)
+   calltext <- call("coxphSLMADS",search.filter=formula, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    cat("\n Class of calltext\n")

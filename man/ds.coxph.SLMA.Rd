@@ -4,14 +4,18 @@
 \alias{ds.coxph.SLMA}
 \title{Performs survival analysis using Cox proportional hazards model}
 \usage{
-ds.coxph.SLMA(search.filter = NULL, dataName = NULL)
+ds.coxph.SLMA(formula = NULL, dataName = NULL, datasources = NULL)
 }
 \arguments{
-\item{search.filter}{character string (potentially including \code{*} symbol without spaces) 
+\item{formula}{character string (potentially including \code{*} symbol without spaces) 
 specifying the formula that you want to pass to the server-side.
 For more information see \strong{Details}.}
 
 \item{dataName}{character string of name of data frame}
+
+\item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
+If the \code{datasources} argument is not specified
+the default set of connections will be used: see \code{\link{datashield.connections_default}}.}
 }
 \value{
 \code{coxphSLMADS} returns to the client-side a summary of 
@@ -64,8 +68,8 @@ Server function called: \code{coxphSLMADS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.coxph.SLMA(search.filter = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
-            dataName = 'D')
+  dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+            dataName = 'D', datasources = connections)
   
   # clear the Datashield R sessions and logout
   datashield.logout(connections)
