@@ -70,6 +70,10 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    # TODO: fix later
    formula = search.filter
    
+   # Logic for parsing formula: since this need to be passed
+   #     to parser, we need to remove special symbols
+   #     On the server-side function (coxphSLMADS) this needs
+   #     to be reconstructed
    #formula as text, then split at pipes to avoid triggering parser
    formula <- Reduce(paste, deparse(formula))
    formula <- gsub("survival::Surv(", "spppp", formula, fixed = TRUE)
@@ -81,10 +85,10 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    formula <- gsub(",", "rrr", formula, fixed = TRUE)
    formula <- gsub(" ", "",    formula, fixed = TRUE)
    formula <- gsub("=", "lll", formula, fixed = TRUE)
-   # TODO: fix later this has been commented
    # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
    # gets converted to EVENTzzz ~ D$female
    cat(formula)
+   # convert to formula otherwise we get parser error
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
    
@@ -101,8 +105,10 @@ ds.coxph.SLMA <- function(search.filter=NULL, dataName = NULL)
    cat(as.character(calltext))
    cat("\n End of function \n")	
 
+   # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
   
+   # return summary of coxph model
    return(output)
 	
 }
