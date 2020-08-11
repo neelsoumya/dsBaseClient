@@ -105,7 +105,7 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
 
    # call aggregate function
    # output <- datashield.aggregate(datasources, calltext)
-   output <- DSI::datashield.assign(conns = datasources, value = calltext, symbol = 'survobject') 
+   output <- DSI::datashield.assign(conns = datasources, value = calltext, symbol = 'surv_object') 
    # ds.assign(toAssign = calltext, newobj = 'surv_object', datasources = datasources)
    
    # output <- datashield.assign(conns = datasources, symbol = 'surv_object',
