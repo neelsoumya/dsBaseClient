@@ -93,7 +93,8 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
    cat(search.filter)
    cat("\n")
    # calltext <- call("coxphSLMADS", formula=formula, dataName)
-   calltext <- call("SurvDS", formula=formula, dataName)
+   # calltext <- call("asIntegerDS", formula=formula, dataName) # SurvDS
+   calltext <- call("SurvDS", formula=formula, dataName) # SurvDS
    # datashield.assign()
    
    cat("\n Class of calltext\n")
@@ -104,7 +105,7 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
 
    # call aggregate function
    # output <- datashield.aggregate(datasources, calltext)
-   output <- datashield.assign(conns = datasources, value = calltext, symbol = 'surv_object') 
+   output <- DSI::datashield.assign(conns = datasources, value = calltext, symbol = 'survobject') 
    # ds.assign(toAssign = calltext, newobj = 'surv_object', datasources = datasources)
    
    # output <- datashield.assign(conns = datasources, symbol = 'surv_object',
