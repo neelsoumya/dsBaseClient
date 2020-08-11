@@ -115,7 +115,7 @@ ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
    # ds.assign(toAssign = 'D$female', newobj = 'surv_object', datasources = datasources)
    #ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
    # return summary of coxph model
-   output <- NULL
+   # output <- NULL
    return(output)
 	
 }
