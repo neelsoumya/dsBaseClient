@@ -4,7 +4,7 @@
 \alias{ds.Surv}
 \title{Creates a server-side Survival object for use in Cox proportional hazards model}
 \usage{
-ds.Surv(formula = NULL, dataName = NULL, datasources = NULL)
+ds.Surv(formula = NULL, dataName = NULL, objectname = NULL, datasources = NULL)
 }
 \arguments{
 \item{formula}{character string (potentially including \code{*} symbol without spaces) 
@@ -12,6 +12,9 @@ specifying the formula that you want to pass to the server-side.
 For more information see \strong{Details}.}
 
 \item{dataName}{character string of name of data frame}
+
+\item{objectname}{character string of name of new server-side object which will
+store object of class survival::Surv()}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
@@ -68,8 +71,8 @@ Server function called: \code{coxphSLMADS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
-            dataName = 'D', datasources = connections)
+  dsBaseClient::ds.Surv('SURVTIME', 'EVENT', 'surv_object')
+  dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~D$age+D$female')
   
   # clear the Datashield R sessions and logout
   datashield.logout(connections)
