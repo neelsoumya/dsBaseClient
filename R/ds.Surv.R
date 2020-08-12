@@ -91,13 +91,8 @@ ds.Surv <- function(formula = NULL, dataName = NULL, objectname = NULL, datasour
    
    # call the server side function
    cat("On client side: \n")
-   search.filter = formula
-   cat(search.filter)
    cat("\n")
-   # calltext <- call("coxphSLMADS", formula=formula, dataName)
-   # calltext <- call("asIntegerDS", formula=formula, dataName) # SurvDS
    calltext <- call("SurvDS", formula=formula, dataName) # SurvDS
-   # datashield.assign()
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
