@@ -27,7 +27,7 @@ If the \code{datasources} argument is not specified
 the default set of connections will be used: see \code{\link{datashield.connections_default}}.}
 }
 \value{
-\code{coxphSLMADS} returns to the client-side a summary of 
+\code{SurvDS} returns to the client-side a Surv() obejct for use in
 the Cox proportional hazards model
 }
 \description{
@@ -37,7 +37,7 @@ Creates a server side Survival object and returns it
 This is a function that performs survival analysis using the Cox 
 proportional hazards model. 
 
-Server function called: \code{coxphSLMADS}.
+Server function called: \code{SurvDS}.
 }
 \examples{
 \dontrun{
