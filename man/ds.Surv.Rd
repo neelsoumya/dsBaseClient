@@ -4,14 +4,20 @@
 \alias{ds.Surv}
 \title{Creates a server-side Survival object for use in Cox proportional hazards model}
 \usage{
-ds.Surv(formula = NULL, dataName = NULL, objectname = NULL, datasources = NULL)
+ds.Surv(
+  time_param = NULL,
+  event_param = NULL,
+  objectname = NULL,
+  datasources = NULL
+)
 }
 \arguments{
-\item{formula}{character string (potentially including \code{*} symbol without spaces) 
-specifying the formula that you want to pass to the server-side.
+\item{time_param}{character string
+specifying the server-side parameter that has the time element for survival analysis
 For more information see \strong{Details}.}
 
-\item{dataName}{character string of name of data frame}
+\item{event_param}{character string of name of server side event parameter for
+use in survival analysis}
 
 \item{objectname}{character string of name of new server-side object which will
 store object of class survival::Surv()}
@@ -25,8 +31,7 @@ the default set of connections will be used: see \code{\link{datashield.connecti
 the Cox proportional hazards model
 }
 \description{
-Passes a formula to a server side environment and returns the summary of 
-Cox proportional hazards model from the server.
+Creates a server side Survival object and returns it
 }
 \details{
 This is a function that performs survival analysis using the Cox 

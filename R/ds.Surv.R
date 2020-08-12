@@ -1,15 +1,15 @@
 #' @title Creates a server-side Survival object for use in Cox proportional hazards model
-#' @description Passes a formula to a server side environment and returns the summary of 
-#' Cox proportional hazards model from the server. 
+#' @description Creates a server side Survival object and returns it 
 #' @details This is a function that performs survival analysis using the Cox 
 #' proportional hazards model. 
 #' 
 #' Server function called: \code{coxphSLMADS}. 
 #' 
-#' @param formula character string (potentially including \code{*} symbol without spaces) 
-#' specifying the formula that you want to pass to the server-side.
+#' @param time_param character string  
+#' specifying the server-side parameter that has the time element for survival analysis
 #' For more information see \strong{Details}. 
-#' @param dataName character string of name of data frame
+#' @param event_param character string of name of server side event parameter for
+#'    use in survival analysis
 #' @param objectname character string of name of new server-side object which will
 #'  	store object of class survival::Surv()
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
@@ -63,7 +63,7 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(formula = NULL, dataName = NULL, objectname = NULL, datasources = NULL)
+ds.Surv <- function(time_param = NULL, event_param = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
@@ -73,26 +73,26 @@ ds.Surv <- function(formula = NULL, dataName = NULL, objectname = NULL, datasour
       datasources <- datashield.connections_find()
    }
    
-   # if the argument 'dataName' is set, check that the data frame is defined (i.e. exists) on the server site
-   if(!(is.null(dataName)))
+   # if the argument 'event_param' is set, check that the data frame is defined (i.e. exists) on the server site
+   if(!(is.null(event_param)))
    {
       # TODO: cannot find function isDefined but is is inds.glmerSLMA
-      # defined <- isDefined(datasources, dataName)
+      # defined <- isDefined(datasources, event_param)
    }
    
    # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
    
-   # verify that 'formula' was set
-   if(is.null(formula))
+   # verify that 'time_param' was set
+   if(is.null(time_param))
    {
-      stop(" Please provide a valid survival formula!", call.=FALSE)
+      stop(" Please provide a valid survival time parameter", call.=FALSE)
    }
    
    
    # call the server side function
    cat("On client side: \n")
    cat("\n")
-   calltext <- call("SurvDS", formula=formula, dataName) # SurvDS
+   calltext <- call("SurvDS", formula=time_param, event_param) # SurvDS
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
