@@ -61,7 +61,7 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(formula = NULL, dataName = NULL, datasources = NULL)
+ds.Surv <- function(formula = NULL, dataName = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
