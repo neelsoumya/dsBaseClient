@@ -9,10 +9,12 @@
 #' @param formula character string (potentially including \code{*} symbol without spaces) 
 #' specifying the formula that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
+#' @param dataName character string of name of data frame
+#' @param objectname character string of name of new server-side object which will
+#'  	store object of class survival::Surv()
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
 #' If the \code{datasources} argument is not specified
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
-#' @param dataName character string of name of data frame
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee, 2020
@@ -53,8 +55,8 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
-#'             dataName = 'D', datasources = connections)
+#'   dsBaseClient::ds.Surv('SURVTIME', 'EVENT', 'surv_object')
+#'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~D$age+D$female')
 #'   
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(connections)
