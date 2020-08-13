@@ -21,6 +21,7 @@ test_that("setup", {
 })
 
 #connect.studies.dataset.dasim(c("SURVTIME"))
+# init.studies.dataset.survival()
 
 #
 # Tests
