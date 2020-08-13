@@ -20,8 +20,9 @@ test_that("setup", {
     ds_expect_variables(c("D"))
 })
 
+
+init.studies.dataset.survival(list("SURVTIME"))
 #connect.studies.dataset.dasim(c("SURVTIME"))
-# init.studies.dataset.survival()
 
 #
 # Tests
