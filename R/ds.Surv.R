@@ -92,7 +92,7 @@ ds.Surv <- function(time_param = NULL, event_param = NULL, objectname = NULL, da
    # call the server side function
    cat("On client side: \n")
    cat("\n")
-   calltext <- call("SurvDS", formula=time_param, event_param) # SurvDS
+   calltext <- call("SurvDS", time_param, event_param) # SurvDS
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
