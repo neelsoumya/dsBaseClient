@@ -20,9 +20,21 @@ test_that("setup", {
     ds_expect_variables(c("D"))
 })
 
+#connect.studies.dataset.dasim(c("SURVTIME"))
+
 #
 # Tests
 #
+
+# make sure that the outcome is numeric 
+#ds.asNumeric(x.name = "D$cens",
+#             newobj = "EVENT")
+#             #datasources = connections)
+
+#ds.asNumeric(x.name = "D$survtime",
+#             newobj = "SURVTIME")#,
+             #datasources = connections)
+
 
 context("ds.retStr::smk")
 test_that("simple ds.retStr call", {
@@ -51,21 +63,10 @@ test_that("simple call with special character", {
 context("ds.retStr::smk")
 test_that("simple error, SQL injection", {
     
-    expect_error( as.character(ds.retStr('1==1') ) )
+    expect_error( as.character(  ds.coxphSLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$female', dataName = 'D', datasources = connections)   ) )
 })
 
-context("ds.retStr::smk")
-test_that("space in string error", {
-    
-    expect_error( as.character(ds.retStr('he llo') ) )
-})
-
-
-context("ds.retStr::smk")
-test_that("alphanumeric characters", {
-    
-    expect_error( as.character(ds.retStr('$@12 == 3') ) )
-})
+cat("hello")
 
 
 
