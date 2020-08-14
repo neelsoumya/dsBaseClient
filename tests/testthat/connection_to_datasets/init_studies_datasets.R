@@ -58,10 +58,33 @@ init.studies.dataset.survival <- function(variables)
     }
 }
 
+
+init.studies.dataset.survival_nomissing <- function(variables)
+{
+  # function to connect to survival no missing dataset SURVIVAL.EXPAND_NO_MISSING1
+  if (ds.test_env$secure_login_details)
+  {
+    if (ds.test_env$driver == "OpalDriver")
+    {
+      builder <- DSI::newDSLoginBuilder(.silent = TRUE)
+      builder$append(server = "survival1", url = ds.test_env$ip_address_1, user = ds.test_env$user_1, password = ds.test_env$password_1, table = "SURVIVAL.EXPAND_NO_MISSING1")
+      builder$append(server = "survival2", url = ds.test_env$ip_address_2, user = ds.test_env$user_2, password = ds.test_env$password_2, table = "SURVIVAL.EXPAND_NO_MISSING2")
+      builder$append(server = "survival3", url = ds.test_env$ip_address_3, user = ds.test_env$user_3, password = ds.test_env$password_3, table = "SURVIVAL.EXPAND_NO_MISSING3")
+      ds.test_env$login.data <- builder$build()
+    }
+    else 
+    {
+      ds.test_env$login.data <- DSLite::setupSURVIVALTest("dsBase", env = ds.test_env)
+    }
+    ds.test_env$stats.var <- variables
+  }
+}
+
+
 add_server_side_var_survival <- function()
 {
   # add server-side variables for survival analysis
-  # assumes that init.studies.dataset.survival() already called
+  # assumes that init.studies.dataset.survival_nomissing() already called
   # make sure that the outcome is numeric 
   ds.asNumeric(x.name = "D$cens",
                newobj = "EVENT", datasources = ds.test_env$connections )
