@@ -46,19 +46,7 @@ test_that("simple ds.retStr call", {
 
 })
 
-context("ds.retStr::smk")
-test_that("simple call", {
-    dim.res <- ds.retStr('1234')
-    
-    expect_match(as.character(dim.res), '123', ignore.case = TRUE)
-})
 
-context("ds.retStr::smk")
-test_that("simple call with special character", {
-    dim.res <- ds.retStr('$')
-    
-    expect_match(as.character(dim.res), '$', ignore.case = TRUE)
-})
 
 # testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
