@@ -58,6 +58,20 @@ init.studies.dataset.survival <- function(variables)
     }
 }
 
+add_server_side_var_survival <- function()
+{
+  # add server-side variables for survival analysis
+  # assumes that init.studies.dataset.survival() already called
+  # make sure that the outcome is numeric 
+  ds.asNumeric(x.name = "D$cens",
+               newobj = "EVENT", datasources = ds.test_env$connections )
+  
+  ds.asNumeric(x.name = "D$survtime",
+              newobj = "SURVTIME", datasources = ds.test_env$connections )
+  
+  return(ds.ls(datasources = ds.test_env$connections))
+}
+
 init.studies.dataset.cluster.int <- function(variables)
 {
   if (ds.test_env$secure_login_details)

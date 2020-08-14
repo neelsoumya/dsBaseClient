@@ -20,22 +20,16 @@ test_that("setup", {
     ds_expect_variables(c("D"))
 })
 
-
-init.studies.dataset.survival(list("SURVTIME"))
+connect.studies.dataset.survival(list("D"))
+init.studies.dataset.survival(list("D"))
 #connect.studies.dataset.dasim(c("SURVTIME"))
+# add server side survival variables
+ls_object <- add_server_side_var_survival()
+print(ls_object)
 
 #
 # Tests
 #
-
-# make sure that the outcome is numeric 
-#ds.asNumeric(x.name = "D$cens",
-#             newobj = "EVENT")
-#             #datasources = connections)
-
-#ds.asNumeric(x.name = "D$survtime",
-#             newobj = "SURVTIME")#,
-             #datasources = connections)
 
 
 context("ds.retStr::smk")
@@ -50,10 +44,18 @@ test_that("simple ds.retStr call", {
 
 # testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
-context("ds.retStr::smk")
+context("ds.coxphSLMA::smk")
 test_that("simple error, SQL injection", {
     
-    expect_error( as.character(  ds.coxphSLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$female', dataName = 'D', datasources = connections)   ) )
+    try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~1', dataName = 'D') 
+    , silent = FALSE)
+    # TODO: use different survival dataset no missing
+    
+    print( datashield.errors() )
+    
+    # summary(cox_object)
+    
+    expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
 })
 
 cat("hello")
@@ -66,10 +68,11 @@ cat("hello")
 
 context("ds.dim::smk::shutdown")
 
-test_that("shutdown", {
-    ds_expect_variables(c("D"))
-})
+#test_that("shutdown", {
+#    ds_expect_variables(c("D"))
+#})
 
 disconnect.studies.dataset.cnsim()
+disconnect.studies.dataset.survival()
 
 context("ds.dim::smk::done")
