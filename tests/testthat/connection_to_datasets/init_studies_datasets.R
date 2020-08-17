@@ -86,10 +86,10 @@ add_server_side_var_survival <- function()
   # add server-side variables for survival analysis
   # assumes that init.studies.dataset.survival_nomissing() already called
   # make sure that the outcome is numeric 
-  ds.asNumeric(x.name = "D$CENS", # not cens
+  ds.asNumeric(x.name = "D$CENS", # NOTE: not cens
                newobj = "EVENT", datasources = ds.test_env$connections )
   
-  ds.asNumeric(x.name = "D$SURVTIME", # not survtime
+  ds.asNumeric(x.name = "D$SURVTIME", # NOTE: not survtime
               newobj = "SURVTIME", datasources = ds.test_env$connections )
   
   return(ds.ls(datasources = ds.test_env$connections))
