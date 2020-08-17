@@ -52,7 +52,7 @@ test_that("simple error, SQL injection", {
     #, silent = FALSE)
     
     surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
-    try(cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE', dataName = 'D')
+    try(cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     , silent=FALSE)
     # print(cox_object$study1$call)
     
