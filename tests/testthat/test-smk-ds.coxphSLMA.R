@@ -21,7 +21,8 @@ test_that("setup", {
 })
 
 connect.studies.dataset.survival(list("D"))
-init.studies.dataset.survival(list("D"))
+#init.studies.dataset.survival(list("D"))
+init.studies.dataset.survival_nomissing(list("D"))
 #connect.studies.dataset.dasim(c("SURVTIME"))
 # add server side survival variables
 ls_object <- add_server_side_var_survival()
@@ -47,9 +48,15 @@ test_that("simple ds.retStr call", {
 context("ds.coxphSLMA::smk")
 test_that("simple error, SQL injection", {
     
-    try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~1', dataName = 'D') 
-    , silent = FALSE)
-    # TODO: use different survival dataset no missing
+    #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
+    #, silent = FALSE)
+    
+    surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
+    try(cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE', dataName = 'D')
+    , silent=FALSE)
+    # print(cox_object$study1$call)
+    
+    # print(cox_object$study1$coefficients[1,1])
     
     print( datashield.errors() )
     
