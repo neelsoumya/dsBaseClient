@@ -15,7 +15,7 @@
 context("ds.retStr::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
-connect.studies.dataset.survival(list("survtime","time.id","female","age.60"))
+connect.studies.dataset.survival_nomissing(list("cens","survtime","time.id","female","age.60"))
 
 test_that("setup", {
     ds_expect_variables(c("D"))
@@ -54,8 +54,9 @@ test_that("simple error, SQL injection", {
     #, silent = FALSE)
     
     surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
-    try(cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
-    , silent=FALSE)
+    #try(
+    cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
+    #, silent=FALSE)
     # print(cox_object$study1$call)
     
     # print(cox_object$study1$coefficients[1,1])
@@ -64,7 +65,11 @@ test_that("simple error, SQL injection", {
     
     # summary(cox_object)
     
-    expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
+    # expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
+    
+    # wrong formula
+    expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)=D$age', dataName = 'D')   ) )
+    
 })
 
 cat("hello")

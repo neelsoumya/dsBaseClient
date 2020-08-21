@@ -176,6 +176,15 @@ connect.studies.dataset.survival <- function(variables)
     log.in.data.server()
 }
 
+connect.studies.dataset.survival_nomissing <- function(variables)
+{
+  log.out.data.server()
+  source("connection_to_datasets/login_details.R")
+  init.studies.dataset.survival_nomissing(variables)
+  log.in.data.server()
+}
+
+
 connect.studies.dataset.cluster.int <- function(variables)
 {
   log.out.data.server()
