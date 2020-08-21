@@ -178,6 +178,7 @@ connect.studies.dataset.survival <- function(variables)
 
 connect.studies.dataset.survival_nomissing <- function(variables)
 {
+  # variables is list of columns to be added 
   log.out.data.server()
   source("connection_to_datasets/login_details.R")
   init.studies.dataset.survival_nomissing(variables)
