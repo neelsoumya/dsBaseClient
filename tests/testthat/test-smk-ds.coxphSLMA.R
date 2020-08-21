@@ -14,19 +14,20 @@
 
 context("ds.retStr::smk::setup")
 
-connect.studies.dataset.cnsim(list("LAB_TSC"))
+# connect.studies.dataset.cnsim(list("LAB_TSC"))
+connect.studies.dataset.survival(list("survtime","time.id","female","age.60"))
 
 test_that("setup", {
     ds_expect_variables(c("D"))
 })
 
-connect.studies.dataset.survival(list("D"))
-#init.studies.dataset.survival(list("D"))
-init.studies.dataset.survival_nomissing(list("D"))
-#connect.studies.dataset.dasim(c("SURVTIME"))
-# add server side survival variables
-ls_object <- add_server_side_var_survival()
-print(ls_object)
+#connect.studies.dataset.survival(list("D"))
+##init.studies.dataset.survival(list("D"))
+#init.studies.dataset.survival_nomissing(list("D"))
+##connect.studies.dataset.dasim(c("SURVTIME"))
+## add server side survival variables
+#ls_object <- add_server_side_var_survival()
+#print(ls_object)
 
 #
 # Tests
