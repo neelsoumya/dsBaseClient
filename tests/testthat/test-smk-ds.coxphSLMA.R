@@ -25,9 +25,10 @@ test_that("setup", {
 ##init.studies.dataset.survival(list("D"))
 #init.studies.dataset.survival_nomissing(list("D"))
 ##connect.studies.dataset.dasim(c("SURVTIME"))
-## add server side survival variables
-#ls_object <- add_server_side_var_survival()
-#print(ls_object)
+
+# add server side survival variables
+ls_object <- add_server_side_var_survival()
+print(ls_object)
 
 #
 # Tests
