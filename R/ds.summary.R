@@ -205,11 +205,27 @@ ds.summary <- function(x=NULL, datasources=NULL){
     names(finalOutput) <- stdnames
   }
   
-  # Modifications here for surival::Surv object
+  # Modifications here for survival::Surv object
   if("Surv" %in% typ)
   {
+    
+    for(i in 1:numsources)
+    {
+        # check validity
+        validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
+        
+        # if valid
+        # TODO: continue from here
+        if (validity)
+        {
+        }
+      
+    }
+        
+      # TODO: remove this later
       finalOutput <- "Summary of survival object is currently not allowed."     
   }
+  
 
   return(finalOutput)
 }
