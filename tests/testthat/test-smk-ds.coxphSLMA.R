@@ -12,7 +12,7 @@
 # Set up
 #
 
-context("ds.retStr::smk::setup")
+context("ds.coxphSLMA::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
 connect.studies.dataset.survival_nomissing(list("cens","survtime","time.id","female","age.60"))
@@ -36,9 +36,6 @@ print(ls_object)
 # Tests
 #
 
-
-
-# testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
 context("ds.coxphSLMA::smk")
 test_that("simple error,wrong formula", {
