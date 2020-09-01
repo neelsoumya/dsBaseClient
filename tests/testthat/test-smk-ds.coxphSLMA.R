@@ -35,20 +35,11 @@ print(ls_object)
 #
 
 
-context("ds.retStr::smk")
-test_that("simple ds.retStr call", {
-    dim.res <- ds.retStr('thisishello')
-    
-    expect_match(as.character(dim.res), 'hello', ignore.case = TRUE)
-
-})
-
-
 
 # testthat::expect_error( as.character(ds.retStr('1==1') ) )
               
 context("ds.coxphSLMA::smk")
-test_that("simple error, SQL injection", {
+test_that("simple error,wrong formula", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
     #, silent = FALSE)
@@ -58,12 +49,21 @@ test_that("simple error, SQL injection", {
     cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     #, silent=FALSE)
     # print(cox_object$study1$call)
-    
-    # print(cox_object$study1$coefficients[1,1])
+    print("coeff from simple model")
+    print(cox_object$study1$coefficients[1,1])
     
     print( datashield.errors() )
     
     # summary(cox_object)
+    
+    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    cat("Model coeff")
+    cat(coxph_model_full$study1$coefficients[1])
+    print(summary(coxph_model_full))
+    print(coxph_model_full$study1)
+    #expect_equal(coxph_model_full$study1$coefficients[1], 0.049, threshold = 0.1)
+    
+    print(ds.ls())
     
     # expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
     
