@@ -26,7 +26,9 @@ test_that("setup", {
 #init.studies.dataset.survival_nomissing(list("D"))
 ##connect.studies.dataset.dasim(c("SURVTIME"))
 
+######################################
 # add server side survival variables
+######################################
 ls_object <- add_server_side_var_survival()
 print(ls_object)
 
@@ -49,21 +51,12 @@ test_that("simple error,wrong formula", {
     cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     #, silent=FALSE)
     # print(cox_object$study1$call)
-    print("coeff from simple model")
-    print(cox_object$study1$coefficients[1,1])
+    # print("coeff from simple model")
+    # print(cox_object$study1$coefficients[1,1])
     
-    print( datashield.errors() )
+    # print( datashield.errors() )
     
     # summary(cox_object)
-    
-    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
-    cat("Model coeff")
-    cat(coxph_model_full$study1$coefficients[1])
-    print(summary(coxph_model_full))
-    print(coxph_model_full$study1)
-    #expect_equal(coxph_model_full$study1$coefficients[1], 0.049, threshold = 0.1)
-    
-    print(ds.ls())
     
     # expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
     
@@ -72,7 +65,36 @@ test_that("simple error,wrong formula", {
     
 })
 
-cat("hello")
+
+context("ds.coxphSLMA::smk")
+test_that("simple equal test, checking coefficients", {
+    
+    #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
+    #, silent = FALSE)
+    
+    surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
+    #try(
+    # cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
+    #, silent=FALSE)
+    # print(cox_object$study1$call)
+    # print("coeff from simple model")
+    # print(cox_object$study1$coefficients[1,1])
+    
+    # print( datashield.errors() )
+    
+    # summary(cox_object)
+    
+    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    # cat("Model coeff")
+    # cat(coxph_model_full$survival1$coefficients[1])
+    # print(summary(coxph_model_full))
+    # print(coxph_model_full$survival1)
+    
+    expect_equal(coxph_model_full$survival1$coefficients[1], 0.046, tolerance = 0.0001)
+    
+    #print(ds.ls())
+    
+})
 
 
 
@@ -80,7 +102,7 @@ cat("hello")
 # Done
 #
 
-context("ds.dim::smk::shutdown")
+context("ds.coxphSLMA::smk::shutdown")
 
 #test_that("shutdown", {
 #    ds_expect_variables(c("D"))
