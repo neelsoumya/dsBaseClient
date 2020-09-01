@@ -111,4 +111,4 @@ context("ds.coxphSLMA::smk::shutdown")
 disconnect.studies.dataset.cnsim()
 disconnect.studies.dataset.survival()
 
-context("ds.dim::smk::done")
+context("ds.coxphSLMA::smk::done")
