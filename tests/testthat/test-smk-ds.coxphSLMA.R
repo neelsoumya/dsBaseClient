@@ -95,6 +95,34 @@ test_that("simple equal test, checking coefficients", {
 
 
 
+context("ds.coxphSLMA::smk")
+test_that("simple summary of survival object, checking message", {
+    
+    surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
+    
+    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    
+    print(ds.summary(x = 'surv_object'))
+    expect_match(as.character(ds.summary(x='surv_object')), 'not allowed', ignore.case = TRUE)
+    
+    
+})
+
+
+
+context("ds.coxphSLMA::smk")
+test_that("summary of Cox model, error", {
+    
+    surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
+    
+    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    
+    expect_error(as.character(ds.summary(x='coxph_model_full')) )
+    
+    
+})
+
+
 #
 # Done
 #
