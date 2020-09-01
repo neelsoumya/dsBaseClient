@@ -95,8 +95,9 @@ ds.summary <- function(x=NULL, datasources=NULL){
   # the input object must be a numeric or an integer vector
   # the input object must be a dataframe or a factor
   # Modifications here for survival::Surv object
-  if(!('data.frame' %in% typ) & !('character' %in% typ) & !('factor' %in% typ) & !('integer' %in% typ) & !('list' %in% typ) & !('logical' %in% typ) & !('matrix' %in% typ) & !('numeric' %in% typ) & !('Surv' %in% typ) ){
-    stop("The input object must be a 'data.frame', 'character', factor', 'integer', 'list', 'logical', 'matrix' or 'numeric'.", call.=FALSE)
+  if(!('data.frame' %in% typ) & !('character' %in% typ) & !('factor' %in% typ) & !('integer' %in% typ) & !('list' %in% typ) & !('logical' %in% typ) & !('matrix' %in% typ) & !('numeric' %in% typ) & !('Surv' %in% typ) )
+  {
+      stop("The input object must be a 'data.frame', 'character', factor', 'integer', 'list', 'logical', 'matrix' or 'numeric'.", call.=FALSE)
   }
 
   stdnames <- names(datasources)
@@ -218,6 +219,7 @@ ds.summary <- function(x=NULL, datasources=NULL){
         # TODO: continue from here
         if (validity)
         {
+            
         }
       
     }
