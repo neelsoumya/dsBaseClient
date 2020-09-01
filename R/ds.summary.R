@@ -219,13 +219,18 @@ ds.summary <- function(x=NULL, datasources=NULL){
         # TODO: continue from here
         if (validity)
         {
-            
+            # TODO: remove this later
+            finalOutput <- "Summary of survival object is currently not allowed."     
+        }
+        else
+        {
+            finalOutput <- "Invalid object."    
         }
       
     }
         
-      # TODO: remove this later
-      finalOutput <- "Summary of survival object is currently not allowed."     
+      
+    
   }
   
 
