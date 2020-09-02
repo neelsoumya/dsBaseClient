@@ -216,10 +216,10 @@ ds.summary <- function(x=NULL, datasources=NULL){
         validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
         
         # if valid
-        # TODO: continue from here
         if (validity)
         {
-            # TODO: remove this later
+            # TODO: think about ds.summary() for Surv object
+            # a summary() of a Surv() object returns a table of time and status which could be potentially disclosive 
             finalOutput <- "Summary of survival object is currently not allowed."     
         }
         else
