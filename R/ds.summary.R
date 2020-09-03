@@ -245,7 +245,8 @@ ds.summary <- function(x=NULL, datasources=NULL){
           if(validity)
           {
               l <- DSI::datashield.aggregate(datasources[i], call('lengthDS', x))[[1]]
-              q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('quantileMeanDS(', x, ')' ))))[[1]]
+              # q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('quantileMeanDS(', x, ')' ))))[[1]]
+              q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('meanDS(', x, ')' ))))[[1]][1]
               stdsummary <- list('class'=typ, 'length'=l, 'quantiles & mean'=q)
               finalOutput[[i]] <- stdsummary
           }
