@@ -212,31 +212,51 @@ ds.summary <- function(x=NULL, datasources=NULL){
   }
   
   # Modifications here for survival::Surv object
+  #if("Surv" %in% typ)
+  #{
+    
+  #      for(i in 1:numsources)
+  #      {
+  #            # check validity
+  #            validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
+
+  #            # if valid
+  #            if (validity)
+  #            {
+  #                # TODO: think about ds.summary() for Surv object
+  #                # a summary() of a Surv() object returns a table of time and status which could be potentially disclosive 
+  #                finalOutput <- "Summary of survival object is currently not allowed."     
+  #            }
+  #            else
+  #            {
+  #                finalOutput <- "Invalid object."    
+  #            }
+
+  #      }
+    
+  #}
+
+  
   if("Surv" %in% typ)
   {
-    
-    for(i in 1:numsources)
-    {
-        # check validity
-        validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
-        
-        # if valid
-        if (validity)
-        {
-            # TODO: think about ds.summary() for Surv object
-            # a summary() of a Surv() object returns a table of time and status which could be potentially disclosive 
-            finalOutput <- "Summary of survival object is currently not allowed."     
-        }
-        else
-        {
-            finalOutput <- "Invalid object."    
-        }
-      
-    }
-        
-      
-    
+      for(i in 1:numsources)
+      {
+          validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
+          if(validity)
+          {
+              l <- DSI::datashield.aggregate(datasources[i], call('lengthDS', x))[[1]]
+              q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('quantileMeanDS(', x, ')' ))))[[1]]
+              stdsummary <- list('class'=typ, 'length'=l, 'quantiles & mean'=q)
+              finalOutput[[i]] <- stdsummary
+          }
+          else
+          {
+              finalOutput[[i]] <- 'INVALID object!'
+          }
+      }
+      names(finalOutput) <- stdnames
   }
+  
   
 
   return(finalOutput)
