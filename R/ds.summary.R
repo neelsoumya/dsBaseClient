@@ -67,11 +67,13 @@
 ds.summary <- function(x=NULL, datasources=NULL){
 
   # look for DS connections
-  if(is.null(datasources)){
+  if(is.null(datasources))
+  {
     datasources <- datashield.connections_find()
   }
 
-  if(is.null(x)){
+  if(is.null(x))
+  {
     stop("Please provide the name of the input vector!", call.=FALSE)
   }
 
@@ -83,9 +85,12 @@ ds.summary <- function(x=NULL, datasources=NULL){
   obj2lookfor <- xnames$holders
 
   # check if the input object(s) is(are) defined in all the studies
-  if(is.na(obj2lookfor)){
+  if(is.na(obj2lookfor))
+  {
     defined <- isDefined(datasources, varname)
-  }else{
+  }
+  else
+  {
     defined <- isDefined(datasources, obj2lookfor)
   }
 
