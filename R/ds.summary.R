@@ -236,16 +236,19 @@ ds.summary <- function(x=NULL, datasources=NULL){
     
   #}
 
-  
+  # Modifications here for survival::Surv object
   if("Surv" %in% typ)
   {
       for(i in 1:numsources)
       {
           validity <- DSI::datashield.aggregate(datasources[i], as.symbol(paste0('isValidDS(', x, ')')))[[1]]
+        
+          # if valid request and privacy preserving then
           if(validity)
           {
               l <- DSI::datashield.aggregate(datasources[i], call('lengthDS', x))[[1]]
               # q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('quantileMeanDS(', x, ')' ))))[[1]]
+              # return mean
               q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('meanDS(', x, ')' ))))[[1]][1]
               stdsummary <- list('class'=typ, 'length'=l, 'mean'=q)
               finalOutput[[i]] <- stdsummary
