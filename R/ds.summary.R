@@ -253,13 +253,13 @@ ds.summary <- function(x=NULL, datasources=NULL){
             
               # q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('summarySurvDS(', x, ')' ))))[[1]]
             
-              q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('summarySurvDS(', x, ')' ))))
+              q <- (DSI::datashield.aggregate(datasources[i], as.symbol(paste0('summarySurvDS(', x, ')' ))))[[1]]
             
               # TODO: call summarySurvDS() 
               #   aggregate function
               #   this will takes a Surv object, runs quantileMeanDS() on each of the columns, 
               #   knit them together and return the result.
-              stdsummary <- list('class'=typ, 'length'=l, 'mean'=q$time)
+              stdsummary <- list('class'=typ, 'length'=l, 'time'=q$time, 'event'=q$event)
               finalOutput[[i]] <- stdsummary
           }
           else
