@@ -103,15 +103,28 @@ test_that("simple summary of survival object, checking message", {
     coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
     
     print(ds.summary(x = 'surv_object'))
-    #expect_match(as.character(ds.summary(x='surv_object')), 'not allowed', ignore.case = TRUE)
+    expect_match(as.character(ds.summary(x='surv_object')), 'Mean', ignore.case = TRUE)
     
     
 })
 
 
+context("ds.coxphSLMA::smk")
+test_that("simple summary of survival object, checking message non-existent object error", {
+    
+    surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
+    
+    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    
+    print(ds.summary(x = 'hello'))
+    expect_match(as.character(ds.summary(x='surv_object')), 'not defined', ignore.case = TRUE)
+    
+    
+})
+
 
 context("ds.coxphSLMA::smk")
-test_that("summary of Cox model, error", {
+test_that("summary of Cox model, error since only summary of survival object allowed", {
     
     surv_object <- ds.Surv(time_param = 'SURVTIME', event_param = 'EVENT', objectname = 'surv_object')
     
