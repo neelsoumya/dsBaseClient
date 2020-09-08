@@ -195,7 +195,7 @@ if(!is.null(transmit.object))
   output <- datashield.aggregate(datasources, calltext)
 
   # dummy change
-  cat("\n Hello World from client dsBaseClient::ds.ls() \n")
+  # cat("\n Hello World from client dsBaseClient::ds.ls() \n")
   
   return(output)
   
