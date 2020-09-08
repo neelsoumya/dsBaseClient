@@ -53,7 +53,9 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+#'   dsBaseClient::ds.Surv(time_param='SURVTIME', event_param='EVENT', objectname='surv_object')
+#'
+#'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object ~  D$female', 
 #'             dataName = 'D', datasources = connections)
 #'   
 #'   # clear the Datashield R sessions and logout
@@ -86,7 +88,7 @@ ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
    
    
    # call the server side function
-   cat("On client side: \n")
+   # cat("On client side: \n")
    #search.filter=stats::as.formula(search.filter)
    formula = stats::as.formula(formula)
    # TODO: fix later
@@ -109,7 +111,7 @@ ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
    formula <- gsub("=", "lll", formula, fixed = TRUE)
    # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
    # gets converted to EVENTzzz ~ D$female
-   cat(formula)
+   #cat(formula)
    # convert to formula otherwise we get parser error
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
@@ -117,15 +119,15 @@ ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
    # TODO: fix later
    #search.filter = formula
    #cat(search.filter)
-   cat("\n")
+   #cat("\n")
    calltext <- call("coxphSLMADS", formula=formula, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
-   cat("\n Class of calltext\n")
-   cat(class(calltext))
-   cat("\n What is in calltext ? \n")
-   cat(as.character(calltext))
-   cat("\n End of function \n")	
+   #cat("\n Class of calltext\n")
+   #cat(class(calltext))
+   #cat("\n What is in calltext ? \n")
+   #cat(as.character(calltext))
+   #cat("\n End of function \n")	
 
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
