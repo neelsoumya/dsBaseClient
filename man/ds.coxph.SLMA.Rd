@@ -68,7 +68,9 @@ Server function called: \code{coxphSLMADS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.coxph.SLMA(formula = 'survival::Surv(time = SURVTIME, event = EVENT) ~  D$female', 
+  dsBaseClient::ds.Surv(time_param='SURVTIME', event_param='EVENT', objectname='surv_object')
+
+  dsBaseClient::ds.coxph.SLMA(formula = 'surv_object ~  D$female', 
             dataName = 'D', datasources = connections)
   
   # clear the Datashield R sessions and logout
