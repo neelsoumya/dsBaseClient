@@ -93,7 +93,11 @@ ds.survfit <- function(time_param = NULL, event_param = NULL, objectname = NULL,
    # call the server side function
    cat("On client side: \n")
    cat("\n")
-   calltext <- call("survfitDS", time_param) # , event_param) # SurvDS
+	
+   # TODO: do conversions to formula here
+   # TODO: comment out below
+   formula = time_param	
+   calltext <- call("survfitDS", formula) # , event_param) # SurvDS
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
