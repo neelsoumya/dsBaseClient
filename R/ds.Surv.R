@@ -5,10 +5,12 @@
 #' 
 #' Server function called: \code{SurvDS}. 
 #' 
-#' @param time_param character string  
-#' specifying the server-side parameter that has the time element for survival analysis
+#' @param start character string  
+#' specifying the server-side start time parameter that has the start time element for survival analysis.
+#' @param stop character string  
+#' specifying the server-side stop time parameter that has the stop time element for survival analysis.
 #' For more information see \strong{Details}. 
-#' @param event_param character string of name of server side event parameter for
+#' @param event character string of name of server side event parameter for
 #'    use in survival analysis
 #' @param objectname character string of name of new server-side object which will
 #'  	store object of class survival::Surv()
@@ -63,7 +65,7 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(time_param = NULL, event_param = NULL, objectname = NULL, datasources = NULL)
+ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
@@ -74,7 +76,7 @@ ds.Surv <- function(time_param = NULL, event_param = NULL, objectname = NULL, da
    }
    
    # if the argument 'event_param' is set, check that the data frame is defined (i.e. exists) on the server site
-   if(!(is.null(event_param)))
+   if(!(is.null(event)))
    {
       # TODO: cannot find function isDefined but is is inds.glmerSLMA
       # defined <- isDefined(datasources, event_param)
@@ -82,12 +84,30 @@ ds.Surv <- function(time_param = NULL, event_param = NULL, objectname = NULL, da
    
    # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
    
-   # verify that 'time_param' was set
-   if(is.null(time_param))
+   # verify that 'start' was set
+   if(is.null(start))
    {
-      stop(" Please provide a valid survival time parameter", call.=FALSE)
+      stop(" Please provide a valid survival start time parameter", call.=FALSE)
    }
-   
+
+   # verify that 'stop' was set
+   if(is.null(stop))
+   {
+      stop(" Please provide a valid survival stop time parameter", call.=FALSE)
+   }
+
+   # verify that 'event' was set
+   if(is.null(event))
+   {
+      stop(" Please provide a valid survival event parameter", call.=FALSE)
+   }
+
+   # verify that 'objectname' was set
+   if(is.null(objectname))
+   {
+      stop(" Please provide a valid objectname to store the server-side survival::Surv() object", call.=FALSE)
+   }
+
    
    # call the server side function
    cat("On client side: \n")
