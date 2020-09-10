@@ -114,7 +114,7 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
    cat("\n")
    start = 'STARTTIME'
    stop  = 'ENDTIME'
-   calltext <- call("SurvDS", start, stop, event_param) # SurvDS
+   calltext <- call("SurvDS", start, stop, event) # SurvDS
    
    cat("\n Class of calltext\n")
    cat(class(calltext))
