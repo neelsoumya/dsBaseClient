@@ -1,7 +1,8 @@
-#' @title Creates a server-side Survival object for use in Cox proportional hazards model
-#' @description Creates a server side Survival object and returns it 
-#' @details This is a function that performs survival analysis using the Cox 
-#' proportional hazards model. 
+#' @title Creates a server-side Survival object for use in Cox proportional hazards model.
+#' @description Creates a server side Survival object of type survival::Surv()
+#' @details This is a function that Creates a server side Survival object of type 
+#' 	survival::Surv(). This can be used to perform survival analysis using the Cox 
+#' 	proportional hazards model. 
 #' 
 #' Server function called: \code{SurvDS}. 
 #' 
@@ -110,10 +111,10 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
 
    
    # call the server side function
-   cat("On client side: \n")
-   cat("\n")
-   start = 'STARTTIME'
-   stop  = 'ENDTIME'
+   #cat("On client side: \n")
+   #cat("\n")
+   #start = 'STARTTIME'
+   #stop  = 'ENDTIME'
    calltext <- call("SurvDS", start, stop, event) # SurvDS
    
    cat("\n Class of calltext\n")
