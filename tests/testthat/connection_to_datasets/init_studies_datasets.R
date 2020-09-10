@@ -83,21 +83,33 @@ init.studies.dataset.survival_nomissing <- function(variables)
 
 add_server_side_var_survival <- function()
 {
-  # add server-side variables for survival analysis
-  # assumes that init.studies.dataset.survival_nomissing() already called
-  # make sure that the outcome is numeric 
-  ds.asNumeric(x.name = "D$cens", # NOTE: not cens
-               newobj = "EVENT", datasources = ds.test_env$connections )
-  
-  ds.asNumeric(x.name = "D$survtime", # NOTE: not survtime
-              newobj = "SURVTIME", datasources = ds.test_env$connections )
-  
-  
-  ds.asNumeric(x.name = "D$age.60", # NOTE: not survtime
-               newobj = "AGE", datasources = ds.test_env$connections )
-  
-  return(ds.ls(datasources = ds.test_env$connections))
+      # add server-side variables for survival analysis
+      # assumes that init.studies.dataset.survival_nomissing() already called
+      # make sure that the outcome is numeric 
+      ds.asNumeric(x.name = "D$cens", # NOTE: not cens
+                   newobj = "EVENT", datasources = ds.test_env$connections )
+
+      ds.asNumeric(x.name = "D$survtime", # NOTE: not survtime
+                  newobj = "SURVTIME", datasources = ds.test_env$connections )
+
+
+      ds.asNumeric(x.name = "D$age.60", # NOTE: not survtime
+                   newobj = "AGE", datasources = ds.test_env$connections )
+    
+      # create start time variable
+      ds.asNumeric(x.name = "D$starttime",
+                     newobj = "STARTTIME",
+                     datasources = connections)
+
+      # create end time variable
+      ds.asNumeric(x.name = "D$endtime",
+                     newobj = "ENDTIME",
+                     datasources = connections)
+
+      return(ds.ls(datasources = ds.test_env$connections))
+    
 }
+
 
 init.studies.dataset.cluster.int <- function(variables)
 {
