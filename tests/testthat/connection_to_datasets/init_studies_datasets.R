@@ -99,12 +99,12 @@ add_server_side_var_survival <- function()
       # create start time variable
       ds.asNumeric(x.name = "D$starttime",
                      newobj = "STARTTIME",
-                     datasources = connections)
+                     datasources = ds.test_env$connections)
 
       # create end time variable
       ds.asNumeric(x.name = "D$endtime",
                      newobj = "ENDTIME",
-                     datasources = connections)
+                     datasources = ds.test_env$connections)
 
       return(ds.ls(datasources = ds.test_env$connections))
     
