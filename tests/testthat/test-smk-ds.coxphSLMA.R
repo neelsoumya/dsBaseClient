@@ -15,7 +15,7 @@
 context("ds.coxphSLMA::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
-connect.studies.dataset.survival_nomissing(list("cens","survtime","time.id","female","age.60"))
+connect.studies.dataset.survival_nomissing(list("cens","survtime","time.id","female","age.60","starttime","endtime"))
 
 test_that("setup", {
     ds_expect_variables(c("D"))
