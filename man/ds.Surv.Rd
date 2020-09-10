@@ -5,18 +5,22 @@
 \title{Creates a server-side Survival object for use in Cox proportional hazards model}
 \usage{
 ds.Surv(
-  time_param = NULL,
-  event_param = NULL,
+  start = NULL,
+  stop = NULL,
+  event = NULL,
   objectname = NULL,
   datasources = NULL
 )
 }
 \arguments{
-\item{time_param}{character string
-specifying the server-side parameter that has the time element for survival analysis
+\item{start}{character string
+specifying the server-side start time parameter that has the start time element for survival analysis.}
+
+\item{stop}{character string
+specifying the server-side stop time parameter that has the stop time element for survival analysis.
 For more information see \strong{Details}.}
 
-\item{event_param}{character string of name of server side event parameter for
+\item{event}{character string of name of server side event parameter for
 use in survival analysis}
 
 \item{objectname}{character string of name of new server-side object which will
