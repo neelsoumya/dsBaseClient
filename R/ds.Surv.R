@@ -75,11 +75,11 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
       datasources <- datashield.connections_find()
    }
    
-   # if the argument 'event_param' is set, check that the data frame is defined (i.e. exists) on the server site
+   # if the argument 'event' is set, check that the data frame is defined (i.e. exists) on the server site
    if(!(is.null(event)))
    {
       # TODO: cannot find function isDefined but is is inds.glmerSLMA
-      # defined <- isDefined(datasources, event_param)
+      # defined <- isDefined(datasources, event)
    }
    
    # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
