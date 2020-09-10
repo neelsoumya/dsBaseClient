@@ -105,7 +105,7 @@ test_that("simple summary of survival object, checking message", {
     
     print(datashield.errors())
     # print(ds.summary(x = 'surv_object'))
-    #expect_match(as.character(ds.summary(x='surv_object')), 'Mean', ignore.case = TRUE)
+    expect_match(as.character(ds.summary(x='surv_object')), 'Mean', ignore.case = TRUE)
     
     
 })
