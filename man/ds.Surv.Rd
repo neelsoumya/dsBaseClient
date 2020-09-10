@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds.Surv.R
 \name{ds.Surv}
 \alias{ds.Surv}
-\title{Creates a server-side Survival object for use in Cox proportional hazards model}
+\title{Creates a server-side Survival object for use in Cox proportional hazards model.}
 \usage{
 ds.Surv(
   start = NULL,
@@ -35,11 +35,12 @@ the default set of connections will be used: see \code{\link{datashield.connecti
 the Cox proportional hazards model
 }
 \description{
-Creates a server side Survival object and returns it
+Creates a server side Survival object of type survival::Surv()
 }
 \details{
-This is a function that performs survival analysis using the Cox 
-proportional hazards model. 
+This is a function that Creates a server side Survival object of type 
+	survival::Surv(). This can be used to perform survival analysis using the Cox 
+	proportional hazards model. 
 
 Server function called: \code{SurvDS}.
 }
