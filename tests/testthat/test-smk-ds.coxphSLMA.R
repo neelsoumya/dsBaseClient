@@ -34,6 +34,7 @@ test_that("setup", {
 #   need to convert these to numeric and create server side
 #   variables
 ls_object <- add_server_side_var_survival()
+# snure that objects have been added
 print(ls_object)
 
 #
