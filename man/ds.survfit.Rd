@@ -4,20 +4,12 @@
 \alias{ds.survfit}
 \title{Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model}
 \usage{
-ds.survfit(
-  formula = NULL,
-  event_param = NULL,
-  objectname = NULL,
-  datasources = NULL
-)
+ds.survfit(formula = NULL, objectname = NULL, datasources = NULL)
 }
 \arguments{
 \item{formula}{character string
-specifying the server-side parameter that has the time element for survival analysis
+specifying the formula to be used in survival::survfit() on the server-side.
 For more information see \strong{Details}.}
-
-\item{event_param}{character string of name of server side event parameter for
-use in survival analysis}
 
 \item{objectname}{character string of name of new server-side object which will
 store object of class survival::Surv()}
