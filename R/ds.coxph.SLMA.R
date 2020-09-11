@@ -91,14 +91,14 @@ ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
    # cat("On client side: \n")
    #search.filter=stats::as.formula(search.filter)
    formula = stats::as.formula(formula)
-   # TODO: fix later
-   #formula = search.filter
    
+   ####################################################################	
    # Logic for parsing formula: since this need to be passed
    #     to parser, we need to remove special symbols
    #     On the server-side function (coxphSLMADS) this needs
    #     to be reconstructed
-   #formula as text, then split at pipes to avoid triggering parser
+   #     formula as text, then split at pipes to avoid triggering parser
+   ####################################################################
    formula <- Reduce(paste, deparse(formula))
    formula <- gsub("survival::Surv(", "sssss", formula, fixed = TRUE)
    formula <- gsub("|", "xxx", formula, fixed = TRUE)
