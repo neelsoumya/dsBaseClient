@@ -15,6 +15,7 @@
 context("ds.coxphSLMA::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
+# load survival expand no missing data
 connect.studies.dataset.survival_nomissing(list("cens","survtime","time.id","female","age.60","starttime","endtime"))
 
 test_that("setup", {
@@ -29,6 +30,9 @@ test_that("setup", {
 ######################################
 # add server side survival variables
 ######################################
+# add survival related server side variables like SURVTIME, etc.
+#   need to convert these to numeric and create server side
+#   variables
 ls_object <- add_server_side_var_survival()
 print(ls_object)
 
@@ -87,7 +91,7 @@ test_that("simple equal test, checking coefficients", {
     # print(summary(coxph_model_full))
     # print(coxph_model_full$survival1)
     
-    expect_equal(coxph_model_full$survival1$coefficients[1], 0.046, tolerance = 0.0001)
+    expect_equal(coxph_model_full$survival1$coefficients[1], 0.0387, tolerance = 0.0001)
     
     #print(ds.ls())
     
@@ -120,7 +124,7 @@ test_that("simple summary of survival object, checking message non-existent obje
     
     # print(ds.summary(x = 'hello'))
     # expect_match(as.character(ds.summary(x='surv_object')), 'not defined', ignore.case = TRUE)
-    # expect_error(as.character(ds.summary(x='hello')) )
+    expect_error(as.character(ds.summary(x='hello')) )
     
     
 })
