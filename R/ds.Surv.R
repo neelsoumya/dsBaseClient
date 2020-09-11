@@ -69,7 +69,8 @@
 #'             datasources = connections)
 #'
 #'   # create a server-side survival object
-#'   dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+#'   dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', 
+#'			   event = 'EVENT', objectname='surv_object')
 #'
 #'   # create a Cox proportional hazards model using the created survival object	
 #'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~D$age+D$female')
