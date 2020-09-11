@@ -61,6 +61,8 @@ init.studies.dataset.survival <- function(variables)
 
 init.studies.dataset.survival_nomissing <- function(variables)
 {
+  # this function loads the required data and variables
+  # variables has list of variables to be loaded
   # function to connect to survival no missing dataset SURVIVAL.EXPAND_NO_MISSING1
   if (ds.test_env$secure_login_details)
   {

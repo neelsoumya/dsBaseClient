@@ -82,8 +82,8 @@ test_that("simple equal test, checking coefficients", {
     # summary(cox_object)
     
     coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
-    # cat("Model coeff")
-    # cat(coxph_model_full$survival1$coefficients[1])
+    cat("Model coeff")
+    cat(coxph_model_full$survival1$coefficients[1])
     # print(summary(coxph_model_full))
     # print(coxph_model_full$survival1)
     
