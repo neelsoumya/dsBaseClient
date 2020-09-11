@@ -82,14 +82,40 @@ ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
    # call the server side function
    #cat("On client side: \n")
    #cat("\n")
-	
-   # TODO: do conversions to formula here
+
+   # convert to type formula	
+   formula = stats::as.formula(formula)
+   
+   #####################################################################	
+   # Logic for parsing formula: since this need to be passed
+   #     to parser, we need to remove special symbols
+   #     On the server-side function (coxphSLMADS) this needs
+   #     to be reconstructed
+   # formula as text, then split at pipes to avoid triggering parser
+   #####################################################################
+   formula <- Reduce(paste, deparse(formula))
+   formula <- gsub("survival::Surv(", "sssss", formula, fixed = TRUE)
+   formula <- gsub("|", "xxx", formula, fixed = TRUE)
+   formula <- gsub("(", "yyy", formula, fixed = TRUE)
+   formula <- gsub(")", "zzz", formula, fixed = TRUE)
+   formula <- gsub("/", "ppp", formula, fixed = TRUE)
+   formula <- gsub(":", "qqq", formula, fixed = TRUE)
+   formula <- gsub(",", "rrr", formula, fixed = TRUE)
+   formula <- gsub(" ", "",    formula, fixed = TRUE)
+   formula <- gsub("=", "lll", formula, fixed = TRUE)
+   # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
+   # gets converted to EVENTzzz ~ D$female
+   # cat(formula)
+   # convert to formula otherwise we get parser error
+   formula <- stats::as.formula(formula)	
+
+   # construct call to call()	
    calltext <- call("survfitDS", formula)
    
    #cat("\n Class of calltext\n")
    #cat(class(calltext))
    cat("\n What is in calltext ? \n")
-   #cat(as.character(calltext))
+   cat(as.character(calltext))
    cat("\n End of function \n")	
 
    # call aggregate function
