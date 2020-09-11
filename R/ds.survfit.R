@@ -80,27 +80,25 @@ ds.survfit <- function(formula = NULL, event_param = NULL, objectname = NULL, da
       # TODO: cannot find function isDefined but is is inds.glmerSLMA
       # defined <- isDefined(datasources, event_param)
    }
-   
-   # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
-   
-   # verify that 'time_param' was set
+      
+   # verify that 'formula' was set
    if(is.null(formula))
    {
-      stop(" Please provide a valid survival time parameter", call.=FALSE)
+      stop(" Please provide a valid formula for use in survival::survfit()", call.=FALSE)
    }
    
    
    # call the server side function
-   cat("On client side: \n")
-   cat("\n")
+   #cat("On client side: \n")
+   #cat("\n")
 	
    # TODO: do conversions to formula here
    calltext <- call("survfitDS", formula) # , event_param) # SurvDS
    
-   cat("\n Class of calltext\n")
-   cat(class(calltext))
+   #cat("\n Class of calltext\n")
+   #cat(class(calltext))
    cat("\n What is in calltext ? \n")
-   cat(as.character(calltext))
+   #cat(as.character(calltext))
    cat("\n End of function \n")	
 
    # call aggregate function
