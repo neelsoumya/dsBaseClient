@@ -15,7 +15,7 @@
 #' @param dataName character string of name of data frame
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
-#' @author Soumya Banerjee, 2020
+#' @author Soumya Banerjee and Tom Bishop, 2020
 #' @examples
 #' \dontrun{
 #'
