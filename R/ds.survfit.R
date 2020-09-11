@@ -5,7 +5,7 @@
 #' 
 #' Server function called: \code{survfitDS}. 
 #' 
-#' @param time_param character string  
+#' @param formula character string  
 #' specifying the server-side parameter that has the time element for survival analysis
 #' For more information see \strong{Details}. 
 #' @param event_param character string of name of server side event parameter for
@@ -64,7 +64,7 @@
 #' }
 #'
 #' @export
-ds.survfit <- function(time_param = NULL, event_param = NULL, objectname = NULL, datasources = NULL)
+ds.survfit <- function(formula = NULL, event_param = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
@@ -84,7 +84,7 @@ ds.survfit <- function(time_param = NULL, event_param = NULL, objectname = NULL,
    # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
    
    # verify that 'time_param' was set
-   if(is.null(time_param))
+   if(is.null(formula))
    {
       stop(" Please provide a valid survival time parameter", call.=FALSE)
    }
@@ -95,8 +95,6 @@ ds.survfit <- function(time_param = NULL, event_param = NULL, objectname = NULL,
    cat("\n")
 	
    # TODO: do conversions to formula here
-   # TODO: comment out below
-   formula = time_param	
    calltext <- call("survfitDS", formula) # , event_param) # SurvDS
    
    cat("\n Class of calltext\n")
