@@ -79,5 +79,5 @@ Server function called: \code{coxphSLMADS}.
 
 }
 \author{
-Soumya Banerjee, 2020
+Soumya Banerjee and Tom Bishop, 2020
 }

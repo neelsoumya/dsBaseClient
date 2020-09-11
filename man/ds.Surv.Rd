@@ -81,7 +81,21 @@ Server function called: \code{SurvDS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.Surv('SURVTIME', 'EVENT', 'surv_object')
+  # create start time variable
+  ds.asNumeric(x.name = "D$starttime",
+            newobj = "STARTTIME",
+            datasources = connections)
+
+  # create end time variable
+  ds.asNumeric(x.name = "D$endtime",
+            newobj = "ENDTIME",
+            datasources = connections)
+
+  # create a server-side survival object
+  dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', 
+		   event = 'EVENT', objectname='surv_object')
+
+  # create a Cox proportional hazards model using the created survival object	
   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~D$age+D$female')
   
   # clear the Datashield R sessions and logout
@@ -90,5 +104,5 @@ Server function called: \code{SurvDS}.
 
 }
 \author{
-Soumya Banerjee, 2020
+Soumya Banerjee and Tom Bishop, 2020
 }
