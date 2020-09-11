@@ -5,14 +5,14 @@
 \title{Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model}
 \usage{
 ds.survfit(
-  time_param = NULL,
+  formula = NULL,
   event_param = NULL,
   objectname = NULL,
   datasources = NULL
 )
 }
 \arguments{
-\item{time_param}{character string
+\item{formula}{character string
 specifying the server-side parameter that has the time element for survival analysis
 For more information see \strong{Details}.}
 
