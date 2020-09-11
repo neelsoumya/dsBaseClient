@@ -58,7 +58,20 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.Surv('SURVTIME', 'EVENT', 'surv_object')
+#'   # create start time variable
+#'   ds.asNumeric(x.name = "D$starttime",
+#'             newobj = "STARTTIME",
+#'             datasources = connections)
+#'
+#'   # create end time variable
+#'   ds.asNumeric(x.name = "D$endtime",
+#'             newobj = "ENDTIME",
+#'             datasources = connections)
+#'
+#'   # create a server-side survival object
+#'   dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+#'
+#'   # create a Cox proportional hazards model using the created survival object	
 #'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~D$age+D$female')
 #'   
 #'   # clear the Datashield R sessions and logout
@@ -117,11 +130,11 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
    #stop  = 'ENDTIME'
    calltext <- call("SurvDS", start, stop, event) # SurvDS
    
-   cat("\n Class of calltext\n")
-   cat(class(calltext))
-   cat("\n What is in calltext ? \n")
-   cat(as.character(calltext))
-   cat("\n End of function \n")	
+   #cat("\n Class of calltext\n")
+   #cat(class(calltext))
+   #cat("\n What is in calltext ? \n")
+   #cat(as.character(calltext))
+   #cat("\n End of function \n")	
 
    # call aggregate function
    # output <- datashield.aggregate(datasources, calltext)
