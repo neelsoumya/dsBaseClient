@@ -6,10 +6,8 @@
 #' Server function called: \code{survfitDS}. 
 #' 
 #' @param formula character string  
-#' specifying the server-side parameter that has the time element for survival analysis
+#' specifying the formula to be used in survival::survfit() on the server-side.
 #' For more information see \strong{Details}. 
-#' @param event_param character string of name of server side event parameter for
-#'    use in survival analysis
 #' @param objectname character string of name of new server-side object which will
 #'  	store object of class survival::Surv()
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
@@ -64,7 +62,7 @@
 #' }
 #'
 #' @export
-ds.survfit <- function(formula = NULL, event_param = NULL, objectname = NULL, datasources = NULL)
+ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
@@ -73,14 +71,7 @@ ds.survfit <- function(formula = NULL, event_param = NULL, objectname = NULL, da
    {
       datasources <- datashield.connections_find()
    }
-   
-   # if the argument 'event_param' is set, check that the data frame is defined (i.e. exists) on the server site
-   if(!(is.null(event_param)))
-   {
-      # TODO: cannot find function isDefined but is is inds.glmerSLMA
-      # defined <- isDefined(datasources, event_param)
-   }
-      
+         
    # verify that 'formula' was set
    if(is.null(formula))
    {
@@ -93,7 +84,7 @@ ds.survfit <- function(formula = NULL, event_param = NULL, objectname = NULL, da
    #cat("\n")
 	
    # TODO: do conversions to formula here
-   calltext <- call("survfitDS", formula) # , event_param) # SurvDS
+   calltext <- call("survfitDS", formula)
    
    #cat("\n Class of calltext\n")
    #cat(class(calltext))
