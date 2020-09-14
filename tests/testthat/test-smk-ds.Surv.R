@@ -144,6 +144,14 @@ test_that("summary of Cox model, error since only summary of survival object all
 })
 
 
+context("ds.Surv::smk")
+test_that("create a Surv object with a parameter which is not of corret type (not numeric)",  {
+ 
+    expect_error( as.character( ds.Surv(start='D$female', stop='ENDTIME', event='EVENT', objectname='surv_object') ) )
+    
+})
+
+
 #
 # Done
 #
