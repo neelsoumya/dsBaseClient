@@ -127,8 +127,6 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
    # call the server side function
    #cat("On client side: \n")
    #cat("\n")
-   #start = 'STARTTIME'
-   #stop  = 'ENDTIME'
    calltext <- call("SurvDS", start, stop, event) # SurvDS
    
    #cat("\n Class of calltext\n")
@@ -145,9 +143,9 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
    # output <- datashield.assign(conns = datasources, symbol = 'surv_object',
    #                             value = calltext)
    
-   #ds.assign(toAssign = 'D$female', newobj = 'E', datasources = connections)
+   # ds.assign(toAssign = 'D$female', newobj = 'E', datasources = connections)
    # ds.assign(toAssign = 'D$female', newobj = 'surv_object', datasources = datasources)
-   #ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
+   # ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
    # return summary of coxph model
    # output <- NULL
    return(output)
