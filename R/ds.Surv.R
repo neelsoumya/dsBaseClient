@@ -87,7 +87,7 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(start = NULL, stop = NULL, event = NULL, type = NULL, origin = NULL, objectname = NULL, datasources = NULL)
+ds.Surv <- function(start = NULL, stop = NULL, event = NULL, type = NULL, origin = 0, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
