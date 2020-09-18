@@ -13,6 +13,12 @@
 #' For more information see \strong{Details}. 
 #' @param event character string of name of server side event parameter for
 #'    use in survival analysis
+#' @param type character string specifying the type of censoring. Possible values are "right", "left",
+#'	"counting", "interval", "interval2", or "mstate"
+#' @param origin numeric, used for counting process data and is the hazard function origin.
+#'	The origin parameter is used with time-dependent strata in order to align the subjects
+#'	properly when they cross over from one strata to another. This parameter has rarely
+#'	proven useful.
 #' @param objectname character string of name of new server-side object which will
 #'  	store object of class survival::Surv()
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
@@ -80,7 +86,7 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, datasources = NULL)
+ds.Surv <- function(start = NULL, stop = NULL, event = NULL, type = NULL, origin = NULL, objectname = NULL, datasources = NULL)
 {
    
    # look for DS connections
@@ -127,6 +133,7 @@ ds.Surv <- function(start = NULL, stop = NULL, event = NULL, objectname = NULL, 
    # call the server side function
    #cat("On client side: \n")
    #cat("\n")
+   # TODO: include type and origin
    calltext <- call("SurvDS", start, stop, event) # SurvDS
    
    #cat("\n Class of calltext\n")
