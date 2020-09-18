@@ -2,12 +2,15 @@
 % Please edit documentation in R/ds.Surv.R
 \name{ds.Surv}
 \alias{ds.Surv}
-\title{Creates a server-side Survival object for use in Cox proportional hazards model.}
+\title{Creates a server-side Survival object. This is used as a response variable in 
+in survival models and Cox proportional hazards models.}
 \usage{
 ds.Surv(
   start = NULL,
   stop = NULL,
   event = NULL,
+  type = NULL,
+  origin = NULL,
   objectname = NULL,
   datasources = NULL
 )
@@ -22,6 +25,14 @@ For more information see \strong{Details}.}
 
 \item{event}{character string of name of server side event parameter for
 use in survival analysis}
+
+\item{type}{character string specifying the type of censoring. Possible values are "right", "left",
+"counting", "interval", "interval2", or "mstate"}
+
+\item{origin}{numeric, used for counting process data and is the hazard function origin.
+The origin parameter is used with time-dependent strata in order to align the subjects
+properly when they cross over from one strata to another. This parameter has rarely
+proven useful.}
 
 \item{objectname}{character string of name of new server-side object which will
 store object of class survival::Surv()}
