@@ -118,11 +118,11 @@ ds.Surv <- function(start = NULL,
       stop(" Please provide a valid survival start time parameter", call.=FALSE)
    }
 
-   # verify that 'stop' was set
-   if(is.null(stop))
-   {
-      stop(" Please provide a valid survival stop time parameter", call.=FALSE)
-   }
+   # verify that 'stop' was set	
+   #if(is.null(stop))
+   #{
+   #   stop(" Please provide a valid survival stop time parameter", call.=FALSE)
+   #}
 
    # verify that 'event' was set
    if(is.null(event))
@@ -141,6 +141,7 @@ ds.Surv <- function(start = NULL,
    #cat("On client side: \n")
    #cat("\n")
    # TODO: include type and origin
+   # TODO: rename start to time and stop to time2 and change order time, event, time2	
    calltext <- call("SurvDS", start, stop, event) # SurvDS
    
    #cat("\n Class of calltext\n")
