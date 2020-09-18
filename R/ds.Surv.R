@@ -1,4 +1,5 @@
-#' @title Creates a server-side Survival object for use in Cox proportional hazards model.
+#' @title Creates a server-side Survival object. This is used as a response variable in 
+#'	in survival models and Cox proportional hazards models.
 #' @description Creates a server side Survival object of type survival::Surv()
 #' @details This is a function that Creates a server side Survival object of type 
 #' 	survival::Surv(). This can be used to perform survival analysis using the Cox 
