@@ -10,11 +10,11 @@
 #' @param time character string  
 #' specifying the server-side start time or follow up timeparameter that has the 
 #' 	start time element or follow-up time for survival analysis.
+#' @param event character string of name of server side event parameter for
+#'    use in survival analysis
 #' @param time2 character string  
 #' specifying the server-side stop time parameter that has the stop time element for survival analysis.
 #' For more information see \strong{Details}. 
-#' @param event character string of name of server side event parameter for
-#'    use in survival analysis
 #' @param type character string specifying the type of censoring. Possible values are "right", "left",
 #'	"counting", "interval", "interval2", or "mstate"
 #' @param origin numeric, used for counting process data and is the hazard function origin.
