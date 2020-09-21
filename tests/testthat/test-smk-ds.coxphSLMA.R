@@ -48,7 +48,7 @@ test_that("simple error,wrong formula", {
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
     #, silent = FALSE)
     
-    dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+    dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     #try(
     cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     #, silent=FALSE)
@@ -74,7 +74,7 @@ test_that("simple equal test, checking coefficients", {
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
     #, silent = FALSE)
     
-    dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+    dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     #try(
     # cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     #, silent=FALSE)
@@ -103,7 +103,7 @@ test_that("simple equal test, checking coefficients", {
 context("ds.coxphSLMA::smk")
 test_that("simple summary of survival object, checking message", {
     
-    try(surv_object <- dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+    try(surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     ,silent=FALSE)
     print(ds.ls())
     # coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
@@ -119,7 +119,7 @@ test_that("simple summary of survival object, checking message", {
 context("ds.coxphSLMA::smk")
 test_that("simple summary of survival object, checking message non-existent object error", {
     
-    surv_object <- dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+    surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     
     coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
     
@@ -134,7 +134,7 @@ test_that("simple summary of survival object, checking message non-existent obje
 context("ds.coxphSLMA::smk")
 test_that("summary of Cox model, error since only summary of survival object allowed", {
     
-    surv_object <- dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', event = 'EVENT', objectname='surv_object')
+    surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     
     coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
     
