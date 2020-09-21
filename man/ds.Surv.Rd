@@ -9,7 +9,7 @@ ds.Surv(
   time = NULL,
   event = NULL,
   time2 = NULL,
-  type = c("right", "left", "interval", "counting", "interval2", "mstate"),
+  type = NULL,
   origin = 0,
   objectname = NULL,
   datasources = NULL
