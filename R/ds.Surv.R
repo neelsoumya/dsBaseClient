@@ -91,7 +91,7 @@
 ds.Surv <- function(time = NULL, 
 		    event = NULL,
 		    time2 = NULL,  
-		    type = c('right', 'left', 'interval', 'counting', 'interval2', 'mstate'),
+		    type = NULL, # c('right', 'left', 'interval', 'counting', 'interval2', 'mstate'),
 		    origin = 0, 
 		    objectname = NULL, 
 		    datasources = NULL)
