@@ -143,7 +143,7 @@ ds.Surv <- function(time = NULL,
    #cat("\n")
    # TODO: include type and origin
    # TODO: rename start to time and stop to time2 and change order time, event, time2	
-   calltext <- call("SurvDS", time, time2, event) # SurvDS
+   calltext <- call("SurvDS", time, time2, event, type, origin) # SurvDS
    
    #cat("\n Class of calltext\n")
    #cat(class(calltext))
