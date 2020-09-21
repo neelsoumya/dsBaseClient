@@ -7,9 +7,10 @@
 #' 
 #' Server function called: \code{SurvDS}. 
 #' 
-#' @param start character string  
-#' specifying the server-side start time parameter that has the start time element for survival analysis.
-#' @param stop character string  
+#' @param time character string  
+#' specifying the server-side start time or follow up timeparameter that has the 
+#' 	start time element or follow-up time for survival analysis.
+#' @param time2 character string  
 #' specifying the server-side stop time parameter that has the stop time element for survival analysis.
 #' For more information see \strong{Details}. 
 #' @param event character string of name of server side event parameter for
@@ -87,9 +88,9 @@
 #' }
 #'
 #' @export
-ds.Surv <- function(start = NULL, 
-		    stop = NULL, 
-		    event = NULL, 
+ds.Surv <- function(time = NULL, 
+		    event = NULL,
+		    time2 = NULL,  
 		    type = c('right', 'left', 'interval', 'counting', 'interval2', 'mstate'),
 		    origin = 0, 
 		    objectname = NULL, 
@@ -112,10 +113,10 @@ ds.Surv <- function(start = NULL,
    
    # ds.assign(toAssign = "survival::Surv(time=SURVTIME,event=EVENT)", newobj = "surv_object", datasources = connections)
    
-   # verify that 'start' was set
-   if(is.null(start))
+   # verify that 'time' was set
+   if(is.null(time))
    {
-      stop(" Please provide a valid survival start time parameter", call.=FALSE)
+      stop(" Please provide a valid survival start time or follow-up time parameter", call.=FALSE)
    }
 
    # verify that 'stop' was set	
@@ -142,7 +143,7 @@ ds.Surv <- function(start = NULL,
    #cat("\n")
    # TODO: include type and origin
    # TODO: rename start to time and stop to time2 and change order time, event, time2	
-   calltext <- call("SurvDS", start, stop, event) # SurvDS
+   calltext <- call("SurvDS", time, time2, event) # SurvDS
    
    #cat("\n Class of calltext\n")
    #cat(class(calltext))
