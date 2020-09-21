@@ -6,9 +6,9 @@
 in survival models and Cox proportional hazards models.}
 \usage{
 ds.Surv(
-  start = NULL,
-  stop = NULL,
+  time = NULL,
   event = NULL,
+  time2 = NULL,
   type = c("right", "left", "interval", "counting", "interval2", "mstate"),
   origin = 0,
   objectname = NULL,
@@ -16,15 +16,16 @@ ds.Surv(
 )
 }
 \arguments{
-\item{start}{character string
-specifying the server-side start time parameter that has the start time element for survival analysis.}
-
-\item{stop}{character string
-specifying the server-side stop time parameter that has the stop time element for survival analysis.
-For more information see \strong{Details}.}
+\item{time}{character string
+specifying the server-side start time or follow up timeparameter that has the 
+    start time element or follow-up time for survival analysis.}
 
 \item{event}{character string of name of server side event parameter for
 use in survival analysis}
+
+\item{time2}{character string
+specifying the server-side stop time parameter that has the stop time element for survival analysis.
+For more information see \strong{Details}.}
 
 \item{type}{character string specifying the type of censoring. Possible values are "right", "left",
 "counting", "interval", "interval2", or "mstate"}
