@@ -13,6 +13,7 @@
 #' If the \code{datasources} argument is not specified
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @param dataName character string of name of data frame
+#' @weights vector of case weights
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -53,7 +54,7 @@
 #'             newobj = "SURVTIME",
 #'             datasources = connections)
 #'
-#'   dsBaseClient::ds.Surv(time_param='SURVTIME', event_param='EVENT', objectname='surv_object')
+#'   dsBaseClient::ds.Surv(time='SURVTIME', event='EVENT', objectname='surv_object')
 #'
 #'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object ~  D$female', 
 #'             dataName = 'D', datasources = connections)
@@ -63,7 +64,7 @@
 #' }
 #'
 #' @export
-ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
+ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, weights, datasources = NULL)
 {
    
    # look for DS connections
@@ -111,7 +112,8 @@ ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, datasources = NULL)
    formula <- gsub("=", "lll", formula, fixed = TRUE)
    # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
    # gets converted to EVENTzzz ~ D$female
-   #cat(formula)
+   # cat(formula)
+	
    # convert to formula otherwise we get parser error
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
