@@ -4,7 +4,7 @@
 \alias{ds.coxph.SLMA}
 \title{Performs survival analysis using Cox proportional hazards model}
 \usage{
-ds.coxph.SLMA(formula = NULL, dataName = NULL, datasources = NULL)
+ds.coxph.SLMA(formula = NULL, dataName = NULL, weights, datasources = NULL)
 }
 \arguments{
 \item{formula}{character string (potentially including \code{*} symbol without spaces) 
@@ -12,6 +12,8 @@ specifying the formula that you want to pass to the server-side.
 For more information see \strong{Details}.}
 
 \item{dataName}{character string of name of data frame}
+
+\item{weights}{vector of case weights}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
@@ -68,7 +70,7 @@ Server function called: \code{coxphSLMADS}.
             newobj = "SURVTIME",
             datasources = connections)
 
-  dsBaseClient::ds.Surv(time_param='SURVTIME', event_param='EVENT', objectname='surv_object')
+  dsBaseClient::ds.Surv(time='SURVTIME', event='EVENT', objectname='surv_object')
 
   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object ~  D$female', 
             dataName = 'D', datasources = connections)
