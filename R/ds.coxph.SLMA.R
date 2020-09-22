@@ -64,7 +64,10 @@
 #' }
 #'
 #' @export
-ds.coxph.SLMA <- function(formula = NULL, dataName = NULL, weights, datasources = NULL)
+ds.coxph.SLMA <- function(formula = NULL,
+			  dataName = NULL,
+			  weights = NULL,
+			  datasources = NULL)
 {
    
    # look for DS connections
