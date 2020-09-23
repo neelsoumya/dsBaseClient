@@ -14,6 +14,7 @@
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @param dataName character string of name of data frame
 #' @param weights vector of case weights
+#' @param init vector of initial values of the iteration.
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -67,6 +68,7 @@
 ds.coxph.SLMA <- function(formula = NULL,
 			  dataName = NULL,
 			  weights = NULL,
+			  init,
 			  datasources = NULL)
 {
    
@@ -121,11 +123,9 @@ ds.coxph.SLMA <- function(formula = NULL,
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
    
-   # TODO: fix later
-   #search.filter = formula
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights)
+   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
