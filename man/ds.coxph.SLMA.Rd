@@ -10,6 +10,7 @@ ds.coxph.SLMA(
   weights = NULL,
   init = NULL,
   ties = "efron",
+  singular.ok = TRUE,
   datasources = NULL
 )
 }
@@ -26,6 +27,11 @@ For more information see \strong{Details}.}
 
 \item{ties}{character string specifying the method for tie handling. The Efron approximation is
 used as the default. Other options are 'breslow' and 'exact'.}
+
+\item{singular.ok}{logical value indicating how to handle collinearity in the model matrix.
+Default is TRUE. If TRUE, the program will automatically skip over columns of the X matrix
+that are linear combinations of earlier columns. In this case the coefficients of such
+columns will be NA and the variance matrix will contain zeros.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
