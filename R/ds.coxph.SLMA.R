@@ -21,6 +21,9 @@
 #'	Default is TRUE. If TRUE, the program will automatically skip over columns of the X matrix
 #'	that are linear combinations of earlier columns. In this case the coefficients of such
 #'	columns will be NA and the variance matrix will contain zeros. 
+#' @param model logical value. If TRUE, the model frame is returned in component model.
+#' @param x logical value. If TRUE, the x matrix is returned in component x.
+#' @param y logical value. If TRUE, the response vector is returned in component y.
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -77,6 +80,9 @@ ds.coxph.SLMA <- function(formula = NULL,
 			  init = NULL,
 			  ties = 'efron',
 			  singular.ok = TRUE,
+			  model = FALSE,
+			  x = FALSE,
+			  y = TRUE,
 			  datasources = NULL)
 {
    
@@ -133,7 +139,7 @@ ds.coxph.SLMA <- function(formula = NULL,
    
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok)
+   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
