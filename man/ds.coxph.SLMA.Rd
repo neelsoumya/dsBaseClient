@@ -9,6 +9,7 @@ ds.coxph.SLMA(
   dataName = NULL,
   weights = NULL,
   init = NULL,
+  ties = "efron",
   datasources = NULL
 )
 }
@@ -22,6 +23,9 @@ For more information see \strong{Details}.}
 \item{weights}{vector of case weights}
 
 \item{init}{vector of initial values of the iteration.}
+
+\item{ties}{character string specifying the method for tie handling. The Efron approximation is
+used as the default. Other options are 'breslow' and 'exact'.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
