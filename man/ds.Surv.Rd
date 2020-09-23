@@ -104,7 +104,7 @@ Server function called: \code{SurvDS}.
             datasources = connections)
 
   # create a server-side survival object
-  dsBaseClient::ds.Surv(start='STARTTIME', stop='ENDTIME', 
+  dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', 
 		   event = 'EVENT', objectname='surv_object')
 
   # create a Cox proportional hazards model using the created survival object	
