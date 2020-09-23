@@ -68,7 +68,7 @@
 ds.coxph.SLMA <- function(formula = NULL,
 			  dataName = NULL,
 			  weights = NULL,
-			  init,
+			  init = NULL,
 			  datasources = NULL)
 {
    
