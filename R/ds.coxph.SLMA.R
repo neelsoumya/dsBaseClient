@@ -17,6 +17,10 @@
 #' @param init vector of initial values of the iteration.
 #' @param ties character string specifying the method for tie handling. The Efron approximation is
 #'	used as the default. Other options are 'breslow' and 'exact'.
+#' @param singular.ok logical value indicating how to handle collinearity in the model matrix.
+#'	Default is TRUE. If TRUE, the program will automatically skip over columns of the X matrix
+#'	that are linear combinations of earlier columns. In this case the coefficients of such
+#'	columns will be NA and the variance matrix will contain zeros. 
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -72,6 +76,7 @@ ds.coxph.SLMA <- function(formula = NULL,
 			  weights = NULL,
 			  init = NULL,
 			  ties = 'efron',
+			  singular.ok = TRUE,
 			  datasources = NULL)
 {
    
@@ -128,7 +133,7 @@ ds.coxph.SLMA <- function(formula = NULL,
    
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties)
+   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
