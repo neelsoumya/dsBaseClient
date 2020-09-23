@@ -15,6 +15,8 @@
 #' @param dataName character string of name of data frame
 #' @param weights vector of case weights
 #' @param init vector of initial values of the iteration.
+#' @param ties character string specifying the method for tie handling. The Efron approximation is
+#'	used as the default. Other options are 'breslow' and 'exact'.
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -69,6 +71,7 @@ ds.coxph.SLMA <- function(formula = NULL,
 			  dataName = NULL,
 			  weights = NULL,
 			  init = NULL,
+			  ties = 'efron',
 			  datasources = NULL)
 {
    
@@ -125,7 +128,7 @@ ds.coxph.SLMA <- function(formula = NULL,
    
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init)
+   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
