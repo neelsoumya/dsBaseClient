@@ -8,7 +8,7 @@ ds.coxph.SLMA(
   formula = NULL,
   dataName = NULL,
   weights = NULL,
-  init,
+  init = NULL,
   datasources = NULL
 )
 }
