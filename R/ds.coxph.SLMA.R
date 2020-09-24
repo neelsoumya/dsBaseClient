@@ -156,6 +156,10 @@ ds.coxph.SLMA <- function(formula = NULL,
 	control <- gsub(",", "rrr", control, fixed = TRUE)
 	control <- gsub(" ", "",    control, fixed = TRUE)
 	control <- gsub("=", "lll", control, fixed = TRUE)
+	   
+	cat(control)
+	cat("formulaforcontrol")
+	control <- stats::as.formula(control)   
    }	   
 	
 	
