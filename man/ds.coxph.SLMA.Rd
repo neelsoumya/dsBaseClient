@@ -14,6 +14,7 @@ ds.coxph.SLMA(
   model = FALSE,
   x = FALSE,
   y = TRUE,
+  control = NULL,
   datasources = NULL
 )
 }
@@ -41,6 +42,9 @@ columns will be NA and the variance matrix will contain zeros.}
 \item{x}{logical value. If TRUE, the x matrix is returned in component x.}
 
 \item{y}{logical value. If TRUE, the response vector is returned in component y.}
+
+\item{control}{object of class survival::coxph.control() specifying iteration limit and 
+other control options. Default is survival::coxph.control()}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
