@@ -24,6 +24,8 @@
 #' @param model logical value. If TRUE, the model frame is returned in component model.
 #' @param x logical value. If TRUE, the x matrix is returned in component x.
 #' @param y logical value. If TRUE, the response vector is returned in component y.
+#' @param control object of class survival::coxph.control() specifying iteration limit and 
+#'		other control options. Default is survival::coxph.control()
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -83,6 +85,7 @@ ds.coxph.SLMA <- function(formula = NULL,
 			  model = FALSE,
 			  x = FALSE,
 			  y = TRUE,
+			  control = NULL,
 			  datasources = NULL)
 {
    
