@@ -147,19 +147,19 @@ ds.coxph.SLMA <- function(formula = NULL,
    if (!is.null(control))
    {	   
    	control <- Reduce(paste, deparse(control))
-   	control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
-   	control <- gsub("|", "xxx", control, fixed = TRUE)
-   	control <- gsub("(", "yyy", control, fixed = TRUE)
-   	control <- gsub(")", "zzz", control, fixed = TRUE)
-	control <- gsub("/", "ppp", control, fixed = TRUE)
-	control <- gsub(":", "qqq", control, fixed = TRUE)
+        control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
+        control <- gsub("|", "xxx", control, fixed = TRUE)
+        control <- gsub("(", "yyy", control, fixed = TRUE)
+        control <- gsub(")", "zzz", control, fixed = TRUE)
+        control <- gsub("/", "ppp", control, fixed = TRUE)
+        control <- gsub(":", "qqq", control, fixed = TRUE)
 	control <- gsub(",", "rrr", control, fixed = TRUE)
-	control <- gsub(" ", "",    control, fixed = TRUE)
-	control <- gsub("=", "lll", control, fixed = TRUE)
+        control <- gsub(" ", "",    control, fixed = TRUE)
+        control <- gsub("=", "lll", control, fixed = TRUE)
 	   
 	cat(control)
 	cat("formulaforcontrol")
-	control <- stats::as.formula(control)   
+	#control <- stats::as.formula(control)   
    }	   
 	
 	
