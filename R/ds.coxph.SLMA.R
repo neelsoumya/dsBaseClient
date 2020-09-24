@@ -134,7 +134,7 @@ ds.coxph.SLMA <- function(formula = NULL,
    formula <- gsub("=", "lll", formula, fixed = TRUE)
    # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
    # gets converted to EVENTzzz ~ D$female
-   # cat(formula)
+   cat(formula)
 	
    # convert to formula otherwise we get parser error
    formula <- stats::as.formula(formula)
