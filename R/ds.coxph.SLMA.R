@@ -142,7 +142,7 @@ ds.coxph.SLMA <- function(formula = NULL,
    
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y)
+   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
