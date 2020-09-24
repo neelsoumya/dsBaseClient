@@ -144,12 +144,16 @@ ds.coxph.SLMA <- function(formula = NULL,
    ####################################################################
    # Logic for parsing control argument
    ####################################################################
-   control <- Reduce(paste, deparse(control))
-   control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
-   control <- gsub("|", "xxx", control, fixed = TRUE)
-   control <- gsub("(", "yyy", control, fixed = TRUE)
-   control <- gsub(")", "zzz", control, fixed = TRUE)
-	
+   if (!is.null(control))
+   {	   
+   	control <- Reduce(paste, deparse(control))
+   	control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
+   	control <- gsub("|", "xxx", control, fixed = TRUE)
+   	control <- gsub("(", "yyy", control, fixed = TRUE)
+   	control <- gsub(")", "zzz", control, fixed = TRUE)
+	control <- gsub("/", "ppp", control, fixed = TRUE)
+	   
+   }	   
 	
 	
    #cat(search.filter)
