@@ -152,7 +152,10 @@ ds.coxph.SLMA <- function(formula = NULL,
    	control <- gsub("(", "yyy", control, fixed = TRUE)
    	control <- gsub(")", "zzz", control, fixed = TRUE)
 	control <- gsub("/", "ppp", control, fixed = TRUE)
-	   
+	control <- gsub(":", "qqq", control, fixed = TRUE)
+	control <- gsub(",", "rrr", control, fixed = TRUE)
+	control <- gsub(" ", "",    control, fixed = TRUE)
+	control <- gsub("=", "lll", control, fixed = TRUE)
    }	   
 	
 	
