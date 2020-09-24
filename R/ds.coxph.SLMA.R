@@ -140,6 +140,18 @@ ds.coxph.SLMA <- function(formula = NULL,
    formula <- stats::as.formula(formula)
    #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
    
+   
+   ####################################################################
+   # Logic for parsing control argument
+   ####################################################################
+   control <- Reduce(paste, deparse(control))
+   control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
+   control <- gsub("|", "xxx", control, fixed = TRUE)
+   control <- gsub("(", "yyy", control, fixed = TRUE)
+   control <- gsub(")", "zzz", control, fixed = TRUE)
+	
+	
+	
    #cat(search.filter)
    #cat("\n")
    calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
