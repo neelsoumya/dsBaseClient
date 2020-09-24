@@ -145,8 +145,15 @@ ds.coxph.SLMA <- function(formula = NULL,
    # Logic for parsing control argument
    ####################################################################
    if (!is.null(control))
-   {	   
-   	control <- Reduce(paste, deparse(control))
+   {	
+        # everything needs to be passed as formula to server
+	#	otherwise will not go through parser
+	#	and a formula needs a ~ something
+	#	so introduce dummy ~ something and remove
+	#	it on server side   
+	control <- paste0(control, "~bbbb")  
+	   
+        control <- Reduce(paste, deparse(control))
         control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
         control <- gsub("|", "xxx", control, fixed = TRUE)
         control <- gsub("(", "yyy", control, fixed = TRUE)
@@ -157,12 +164,6 @@ ds.coxph.SLMA <- function(formula = NULL,
         control <- gsub(" ", "",    control, fixed = TRUE)
         control <- gsub("=", "lll", control, fixed = TRUE)
 	
-	# everything needs to be passed as formula to server
-	#	otherwise will not go through parser
-	#	and a formula needs a ~ something
-	#	so introduce dummy ~ something and remove
-	#	it on server side   
-	control <- paste0(control, "~bbbb")   
 	cat(control)
 	cat("formulaforcontrol")
 	control <- stats::as.formula(control)   
