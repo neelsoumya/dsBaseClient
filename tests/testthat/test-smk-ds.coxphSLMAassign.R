@@ -42,7 +42,7 @@ print(ls_object)
 #
 
               
-context("ds.coxphSLMA::smk")
+context("ds.coxphSLMAassign::smk")
 test_that("simple error,wrong formula", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
@@ -50,7 +50,7 @@ test_that("simple error,wrong formula", {
     
     dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     #try(
-    cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
+    # cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
     #, silent=FALSE)
     # print(cox_object$study1$call)
     # print("coeff from simple model")
@@ -63,12 +63,12 @@ test_that("simple error,wrong formula", {
     # expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age', dataName = 'D')   ) )
     
     # wrong formula
-    expect_error( as.character(  ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)=D$age', dataName = 'D')   ) )
+    expect_error( as.character(  ds.coxphSLMAassign(formula = 'survival::Surv(time=SURVTIME,event=EVENT)=D$age', dataName = 'D', objectname = 'surv_server')   ) )
     
 })
 
 
-context("ds.coxphSLMA::smk")
+context("ds.coxphSLMAassign::smk")
 test_that("simple equal test, checking coefficients", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
@@ -100,38 +100,7 @@ test_that("simple equal test, checking coefficients", {
 
 
 
-context("ds.coxphSLMA::smk")
-test_that("simple summary of survival object, checking message", {
-    
-    try(surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
-    ,silent=FALSE)
-    print(ds.ls())
-    # coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
-    
-    print(datashield.errors())
-    # print(ds.summary(x = 'surv_object'))
-    expect_match(as.character(ds.summary(x='surv_object')), 'Mean', ignore.case = TRUE)
-    
-    
-})
-
-
-context("ds.coxphSLMA::smk")
-test_that("simple summary of survival object, checking message non-existent object error", {
-    
-    surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
-    
-    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
-    
-    # print(ds.summary(x = 'hello'))
-    # expect_match(as.character(ds.summary(x='surv_object')), 'not defined', ignore.case = TRUE)
-    expect_error(as.character(ds.summary(x='hello')) )
-    
-    
-})
-
-
-context("ds.coxphSLMA::smk")
+context("ds.coxphSLMAassign::smk")
 test_that("summary of Cox model, error since only summary of survival object allowed", {
     
     surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
@@ -148,7 +117,7 @@ test_that("summary of Cox model, error since only summary of survival object all
 # Done
 #
 
-context("ds.coxphSLMA::smk::shutdown")
+context("ds.coxphSLMAassign::smk::shutdown")
 
 #test_that("shutdown", {
 #    ds_expect_variables(c("D"))
@@ -157,4 +126,4 @@ context("ds.coxphSLMA::smk::shutdown")
 disconnect.studies.dataset.cnsim()
 disconnect.studies.dataset.survival()
 
-context("ds.coxphSLMA::smk::done")
+context("ds.coxphSLMAassign::smk::done")
