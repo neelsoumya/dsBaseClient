@@ -12,7 +12,7 @@
 # Set up
 #
 
-context("ds.coxphSLMAassign::smk::setup")
+context("ds.cox.zphSLMA::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
 # load survival expand no missing data
@@ -42,7 +42,7 @@ print(ls_object)
 #
 
               
-context("ds.coxphSLMAassign::smk")
+context("ds.cox.zphSLMA::smk")
 test_that("simple error,wrong formula", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
@@ -68,7 +68,7 @@ test_that("simple error,wrong formula", {
 })
 
 
-context("ds.coxphSLMAassign::smk")
+context("ds.cox.zphSLMA::smk")
 test_that("simple equal test, checking coefficients", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
@@ -100,24 +100,30 @@ test_that("simple equal test, checking coefficients", {
 
 
 
-context("ds.coxphSLMAassign::smk")
-test_that("summary of Cox model, error since only summary of survival object allowed", {
+
+
+context("ds.cox.zphSLMA::smk")
+test_that("simple test, checking coefficients of diagnostics", {
+        
+    dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
     
-    surv_object <- dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
+    dsBaseClient::ds.coxphSLMAassign(formula = 'surv_object~AGE', objectname = 'cox_object_serverside')
     
-    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
+    dsBaseClient::ds.cox.zphSLMA(fit = 'cox_object_serverside')
     
-    expect_error(as.character(ds.summary(x='coxph_model_full')) )
+    # expect_equal(coxph_model_full$survival1$coefficients[1], 0.0387, tolerance = 0.0001)
     
+    #print(ds.ls())
     
 })
+
 
 
 #
 # Done
 #
 
-context("ds.coxphSLMAassign::smk::shutdown")
+context("ds.cox.zphSLMA::smk::shutdown")
 
 #test_that("shutdown", {
 #    ds_expect_variables(c("D"))
@@ -126,4 +132,4 @@ context("ds.coxphSLMAassign::smk::shutdown")
 disconnect.studies.dataset.cnsim()
 disconnect.studies.dataset.survival()
 
-context("ds.coxphSLMAassign::smk::done")
+context("ds.cox.zphSLMA::smk::done")
