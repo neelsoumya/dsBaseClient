@@ -112,7 +112,7 @@ ds.cox.zphSLMA <- function(fit = NULL,
 	
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("cox.zphSLMADS", fit, transform, terms, singledf, global, dataName)
+   calltext <- call("cox.zphSLMADS", fit, transform, terms, singledf, global)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
