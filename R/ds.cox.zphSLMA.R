@@ -9,6 +9,18 @@
 #' @param fit character string (potentially including \code{*} symbol without spaces) 
 #' specifying the name of the fitted server-side Cox proportioanl hazards model
 #'	 that has been created using ds.coxphSLMAassign()
+#' @param transform character string specifying how the survival times should be transformed
+#' 	before the test is performed. Possible values are "km", "rank", "identity" or a
+#' 	function of one argument.
+#' @param terms logical if TRUE, do a test for each term in the model rather than for each
+#'	separate covariate. For a factor variable with k levels, for instance, this would lead
+#'	to a k-1 degree of freedom test. The plot for such variables will be a single curve
+#'	evaluating the linear predictor over time.
+#' @param singledf logical use a single degree of freedom test for terms that have multiple 
+#'	coefficients, i.e., the test that corresponds most closely to the plot. If terms=FALSE
+#'	this argument has no effect.
+#' @param global logical should a global chi-square test be done, in addition to the per-variable
+#'	or per-term tests tests. 
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
 #' If the \code{datasources} argument is not specified
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
@@ -65,8 +77,13 @@
 #'
 #' @export
 ds.cox.zphSLMA <- function(fit = NULL,
+			   transform = 'km',
+			   terms = TRUE,
+			   singledf = FALSE,
+			   global = TRUE,
                            dataName = NULL,
-			   datasources = NULL)
+			   datasources = NULL
+			  )
 {
    
    # look for DS connections
@@ -95,7 +112,7 @@ ds.cox.zphSLMA <- function(fit = NULL,
 	
    #cat(search.filter)
    #cat("\n")
-   calltext <- call("cox.zphSLMADS", fit, dataName)
+   calltext <- call("cox.zphSLMADS", fit, transform, terms, singledf, global, dataName)
    # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
    #cat("\n Class of calltext\n")
