@@ -2,7 +2,7 @@
 #' @description This function tests the proportional hazards assumption 
 #'	for a Cox proportional hazards model.
 #' @details This is a function that performs diagnostics on a fitted Cox 
-#' proportional hazards model. 
+#' 	proportional hazards model. 
 #' 
 #' Server function called: \code{cox.zphSLMADS}. 
 #' 
