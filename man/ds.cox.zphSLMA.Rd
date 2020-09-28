@@ -4,12 +4,36 @@
 \alias{ds.cox.zphSLMA}
 \title{Tests the proportional hazards assumption for a Cox proportional hazards model}
 \usage{
-ds.cox.zphSLMA(fit = NULL, dataName = NULL, datasources = NULL)
+ds.cox.zphSLMA(
+  fit = NULL,
+  transform = "km",
+  terms = TRUE,
+  singledf = FALSE,
+  global = TRUE,
+  dataName = NULL,
+  datasources = NULL
+)
 }
 \arguments{
 \item{fit}{character string (potentially including \code{*} symbol without spaces) 
 specifying the name of the fitted server-side Cox proportioanl hazards model
  that has been created using ds.coxphSLMAassign()}
+
+\item{transform}{character string specifying how the survival times should be transformed
+before the test is performed. Possible values are "km", "rank", "identity" or a
+function of one argument.}
+
+\item{terms}{logical if TRUE, do a test for each term in the model rather than for each
+separate covariate. For a factor variable with k levels, for instance, this would lead
+to a k-1 degree of freedom test. The plot for such variables will be a single curve
+evaluating the linear predictor over time.}
+
+\item{singledf}{logical use a single degree of freedom test for terms that have multiple 
+coefficients, i.e., the test that corresponds most closely to the plot. If terms=FALSE
+this argument has no effect.}
+
+\item{global}{logical should a global chi-square test be done, in addition to the per-variable
+or per-term tests tests.}
 
 \item{dataName}{character string of name of data frame
 For more information see \strong{Details}.}
