@@ -8,7 +8,11 @@
 #' 
 #' @param fit character string (potentially including \code{*} symbol without spaces) 
 #' specifying the name of the fitted server-side Cox proportioanl hazards model
-#'	 that has been created using ds.coxphSLMAassign() 
+#'	 that has been created using ds.coxphSLMAassign()
+#' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
+#' If the \code{datasources} argument is not specified
+#' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
+#' @param dataName character string of name of data frame
 #' For more information see \strong{Details}. 
 #' @return \code{cox.zphSLMADS} returns to the client-side the diagnostics of
 #' 	the Cox proportional hazards model
