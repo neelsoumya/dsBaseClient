@@ -24,7 +24,6 @@
 #' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
 #' If the \code{datasources} argument is not specified
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
-#' @param dataName character string of name of data frame
 #' For more information see \strong{Details}. 
 #' @return \code{cox.zphSLMADS} returns to the client-side the diagnostics of
 #' 	the Cox proportional hazards model
@@ -81,7 +80,6 @@ ds.cox.zphSLMA <- function(fit = NULL,
 			   terms = TRUE,
 			   singledf = FALSE,
 			   global = TRUE,
-                           dataName = NULL,
 			   datasources = NULL
 			  )
 {
@@ -92,14 +90,7 @@ ds.cox.zphSLMA <- function(fit = NULL,
    {
       datasources <- datashield.connections_find()
    }
-   
-   # if the argument 'dataName' is set, check that the data frame is defined (i.e. exists) on the server site
-   if(!(is.null(dataName)))
-   {
-      # TODO: cannot find function isDefined but is is inds.glmerSLMA
-      # defined <- isDefined(datasources, dataName)
-   }
-   
+      
    # verify that 'fit' was set
    if(is.null(fit))
    {
