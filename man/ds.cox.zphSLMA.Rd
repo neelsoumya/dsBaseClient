@@ -10,7 +10,6 @@ ds.cox.zphSLMA(
   terms = TRUE,
   singledf = FALSE,
   global = TRUE,
-  dataName = NULL,
   datasources = NULL
 )
 }
@@ -35,12 +34,10 @@ this argument has no effect.}
 \item{global}{logical should a global chi-square test be done, in addition to the per-variable
 or per-term tests tests.}
 
-\item{dataName}{character string of name of data frame
-For more information see \strong{Details}.}
-
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
-the default set of connections will be used: see \code{\link{datashield.connections_default}}.}
+the default set of connections will be used: see \code{\link{datashield.connections_default}}.
+For more information see \strong{Details}.}
 }
 \value{
 \code{cox.zphSLMADS} returns to the client-side the diagnostics of
