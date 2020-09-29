@@ -12,7 +12,7 @@
 # Set up
 #
 
-context("ds.cox.zphSLMA::smk::setup")
+context("ds.coxphSummary::smk::setup")
 
 # connect.studies.dataset.cnsim(list("LAB_TSC"))
 # load survival expand no missing data
@@ -42,7 +42,7 @@ print(ls_object)
 #
 
               
-context("ds.cox.zphSLMA::smk")
+context("ds.coxphSummary::smk")
 test_that("simple error,wrong formula", {
     
     #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
@@ -68,41 +68,8 @@ test_that("simple error,wrong formula", {
 })
 
 
-context("ds.cox.zphSLMA::smk")
-test_that("simple equal test, checking coefficients", {
-    
-    #try( cox_object <- ds.coxph.SLMA(formula = 'survival::Surv(time=SURVTIME,event=EVENT)~D$age.60')#, dataName = 'D') 
-    #, silent = FALSE)
-    
-    dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
-    #try(
-    # cox_object <- ds.coxph.SLMA(formula = 'surv_object~AGE')#, dataName = 'D')
-    #, silent=FALSE)
-    # print(cox_object$study1$call)
-    # print("coeff from simple model")
-    # print(cox_object$study1$coefficients[1,1])
-    
-    # print( datashield.errors() )
-    
-    # summary(cox_object)
-    
-    coxph_model_full <- dsBaseClient::ds.coxph.SLMA(formula = 'surv_object~AGE')
-    cat("Model coeff")
-    cat(coxph_model_full$survival1$coefficients[1])
-    # print(summary(coxph_model_full))
-    # print(coxph_model_full$survival1)
-    
-    expect_equal(coxph_model_full$survival1$coefficients[1], 0.0387, tolerance = 0.0001)
-    
-    #print(ds.ls())
-    
-})
 
-
-
-
-
-context("ds.cox.zphSLMA::smk")
+context("ds.coxphSummary::smk")
 test_that("simple test, checking coefficients of diagnostics", {
         
     dsBaseClient::ds.Surv(time='STARTTIME', time2='ENDTIME', event = 'EVENT', objectname='surv_object', type='counting')
@@ -110,6 +77,8 @@ test_that("simple test, checking coefficients of diagnostics", {
     dsBaseClient::ds.coxphSLMAassign(formula = 'surv_object~AGE', objectname = 'cox_object_serverside')
     
     dsBaseClient::ds.cox.zphSLMA(fit = 'cox_object_serverside')
+    
+    dsBaseClient::ds.coxphSummary(x = 'cox_object_serverside')
     
     # expect_equal(coxph_model_full$survival1$coefficients[1], 0.0387, tolerance = 0.0001)
     
@@ -123,7 +92,7 @@ test_that("simple test, checking coefficients of diagnostics", {
 # Done
 #
 
-context("ds.cox.zphSLMA::smk::shutdown")
+context("ds.coxphSummary::smk::shutdown")
 
 #test_that("shutdown", {
 #    ds_expect_variables(c("D"))
@@ -132,4 +101,4 @@ context("ds.cox.zphSLMA::smk::shutdown")
 disconnect.studies.dataset.cnsim()
 disconnect.studies.dataset.survival()
 
-context("ds.cox.zphSLMA::smk::done")
+context("ds.coxphSummary::smk::done")
