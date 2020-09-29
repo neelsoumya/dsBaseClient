@@ -71,6 +71,10 @@
 #'
 #'   dsBaseClient::ds.coxph.SLMA(formula = 'surv_object ~  D$female', 
 #'             dataName = 'D', datasources = connections)
+#'
+#'   dsBaseClient::ds.coxphSLMAassign(formula = 'surv_object ~  D$female',
+#'              dataName = 'D', datasources = connections,
+#'              objectname = 'coxph_serverside')
 #'   
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(connections)
