@@ -260,6 +260,8 @@ ds.coxph.SLMA <- function(formula = NULL,
 	
        # return this SLMA pooled metafor::rma() list
        return (list(output = output,
+		    betamatrix = betamatrix,
+		    sematrix = sematrix,
 		    SLMA.pooled.ests.matrix = SLMA.pooled.ests.matrix
 		   )
 	      )
