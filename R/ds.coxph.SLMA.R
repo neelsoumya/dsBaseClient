@@ -236,9 +236,10 @@ ds.coxph.SLMA <- function(formula = NULL,
     
            SLMA.pooled.ests.matrix[p,5] <- rma.FE$beta
            SLMA.pooled.ests.matrix[p,6] <- rma.FE$se
-    
        }	   
 	
+       # return this SLMA pooled metafor::rma() list
+       return (SLMA.pooled.ests.matrix)	   
 	   
    }	   
 
