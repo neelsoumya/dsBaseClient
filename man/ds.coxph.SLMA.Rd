@@ -15,6 +15,7 @@ ds.coxph.SLMA(
   x = FALSE,
   y = TRUE,
   control = NULL,
+  combine_with_metafor = FALSE,
   datasources = NULL
 )
 }
@@ -45,6 +46,11 @@ columns will be NA and the variance matrix will contain zeros.}
 
 \item{control}{object of class survival::coxph.control() specifying iteration limit and 
 other control options. Default is survival::coxph.control()}
+
+\item{combine_with_metafor}{logical If TRUE the
+estimates and standard errors for each regression coefficient are pooled across
+studies using random-effects meta-analysis under maximum likelihood (ML),
+restricted maximum likelihood (REML) or fixed-effects meta-analysis (FE). Default FALSE.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
