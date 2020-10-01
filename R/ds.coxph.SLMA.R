@@ -199,7 +199,17 @@ ds.coxph.SLMA <- function(formula = NULL,
    {
        # combine with metafor
        
-       	   
+       # get number of studies
+       numstudies <- length(datasources)
+
+       # number of coefficients in model
+       numcoefficients <- length( output[[1]]$coefficients[,1] ) 
+	   
+       # initialize matrices to store coefficient values and standard errors
+       betamatrix <- matrix(NA, nrow = numcoefficients, ncol = numstudies)
+       sematrix   <- matrix(NA, nrow = numcoefficients, ncol = numstudies)	   
+	   
+	   
    }	   
 
 	
