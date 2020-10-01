@@ -197,13 +197,31 @@ ds.coxph.SLMA <- function(formula = NULL,
    }
    else
    {
+       ###############################	   
        # combine with metafor
-       
+       ###############################
+
        # get number of studies
        numstudies <- length(datasources)
 
-       # number of coefficients in model
-       numcoefficients <- length( output[[1]]$coefficients[,1] ) 
+       # get the max number of coefficients in model
+       # numcoefficients <- length( output[[1]]$coefficients[,1] )
+       # create a variable to store max number of coefficients	   
+       numcoefficients_max <- 0
+  
+       # for each study find out the number of coefficients and then get max	   
+       for (g in 1:numstudies)
+       {
+	   # if the number of coefficients in the g th study is greater than max,
+	   #     then make it the new max    
+           if (length(output[[g]]$coefficients[,1]) > numcoefficients_max)
+	   {
+               numcoefficients_max <- length(output[[g]]$coefficients[,1])
+           }
+       }	   
+
+       # assign this max number of coefficients to the variable numcoefficients
+       numcoefficients <- numcoefficients_max	   
 	   
        # initialize matrices to store coefficient values and standard errors
        betamatrix <- matrix(NA, nrow = numcoefficients, ncol = numstudies)
