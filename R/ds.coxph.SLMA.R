@@ -9,9 +9,6 @@
 #' @param formula character string (potentially including \code{*} symbol without spaces) 
 #' specifying the formula that you want to pass to the server-side.
 #' For more information see \strong{Details}. 
-#' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
-#' If the \code{datasources} argument is not specified
-#' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @param dataName character string of name of data frame
 #' @param weights vector of case weights
 #' @param init vector of initial values of the iteration.
@@ -26,6 +23,13 @@
 #' @param y logical value. If TRUE, the response vector is returned in component y.
 #' @param control object of class survival::coxph.control() specifying iteration limit and 
 #'		other control options. Default is survival::coxph.control()
+#' @param combine_with_metafor logical If TRUE the
+#' 	estimates and standard errors for each regression coefficient are pooled across
+#' 	studies using random-effects meta-analysis under maximum likelihood (ML),
+#' 	restricted maximum likelihood (REML) or fixed-effects meta-analysis (FE). Default FALSE. 
+#' @param datasources a list of \code{\link{DSConnection-class}} objects obtained after login. 
+#' If the \code{datasources} argument is not specified
+#' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
 #' @author Soumya Banerjee and Tom Bishop, 2020
@@ -86,6 +90,7 @@ ds.coxph.SLMA <- function(formula = NULL,
 			  x = FALSE,
 			  y = TRUE,
 			  control = NULL,
+			  combine_with_metafor = FALSE,
 			  datasources = NULL)
 {
    
@@ -185,7 +190,18 @@ ds.coxph.SLMA <- function(formula = NULL,
    output <- datashield.aggregate(datasources, calltext)
   
    # return summary of coxph model
-   return(output)
+   if (combine_with_metafor == FALSE)
+   {	   
+       # do not combine with metafor return summary of Cox model	   
+       return(output)
+   }
+   else
+   {
+       # combine with metafor
+       
+       	   
+   }	   
+
 	
 }
 #ds.coxph.SLMA
