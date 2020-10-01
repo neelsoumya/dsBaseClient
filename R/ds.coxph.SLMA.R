@@ -209,6 +209,36 @@ ds.coxph.SLMA <- function(formula = NULL,
        betamatrix <- matrix(NA, nrow = numcoefficients, ncol = numstudies)
        sematrix   <- matrix(NA, nrow = numcoefficients, ncol = numstudies)	   
 	   
+       # for each study store these values
+       for (k in numstudies)
+       {
+           betamatrix[,k] <- output[[k]]$coefficients[,1]
+           sematrix[,k]   <- output[[k]]$coefficients[,2]
+       }
+	   
+       # create a list to store all RMA metafor values
+       dimnames(SLMA.pooled.ests.matrix) <- list(dimnames(betamatrix.valid)[[1]],
+                                                 c("pooled.ML","se.ML","pooled.REML","se.REML","pooled.FE","se.FE")
+					         )
+       
+       # call metafor::rma() for each study and call with ML, REML and FE options
+       for(p in 1:numcoefficients)
+       {
+           rma.ML  <- metafor::rma(yi=as.matrix(betamatrix)[p,], sei=as.matrix(sematrix)[p,], method="ML")
+           rma.REML<- metafor::rma(yi=as.matrix(betamatrix)[p,], sei=as.matrix(sematrix)[p,], method="REML")
+           rma.FE  <- metafor::rma(yi=as.matrix(betamatrix)[p,], sei=as.matrix(sematrix)[p,], method="FE")
+    
+           SLMA.pooled.ests.matrix[p,1] <- rma.ML$beta
+           SLMA.pooled.ests.matrix[p,2] <- rma.ML$se
+    
+           SLMA.pooled.ests.matrix[p,3] <- rma.REML$beta
+           SLMA.pooled.ests.matrix[p,4] <- rma.REML$se
+    
+           SLMA.pooled.ests.matrix[p,5] <- rma.FE$beta
+           SLMA.pooled.ests.matrix[p,6] <- rma.FE$se
+    
+       }	   
+	
 	   
    }	   
 
