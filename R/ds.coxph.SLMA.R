@@ -115,9 +115,6 @@ ds.coxph.SLMA <- function(formula = NULL,
    }
    
    
-   # call the server side function
-   # cat("On client side: \n")
-   #search.filter=stats::as.formula(search.filter)
    formula = stats::as.formula(formula)
    
    ####################################################################	
@@ -169,8 +166,8 @@ ds.coxph.SLMA <- function(formula = NULL,
         control <- gsub(" ", "",    control, fixed = TRUE)
         control <- gsub("=", "lll", control, fixed = TRUE)
 	
-	cat(control)
-	cat("formulaforcontrol")
+	# cat(control)
+	# cat("formulaforcontrol")
 	control <- stats::as.formula(control)   
    }	   
 	
@@ -184,7 +181,6 @@ ds.coxph.SLMA <- function(formula = NULL,
    #cat(class(calltext))
    #cat("\n What is in calltext ? \n")
    #cat(as.character(calltext))
-   #cat("\n End of function \n")	
 
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
