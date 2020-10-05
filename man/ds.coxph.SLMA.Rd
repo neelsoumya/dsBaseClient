@@ -50,7 +50,7 @@ other control options. Default is survival::coxph.control()}
 \item{combine_with_metafor}{logical If TRUE the
 estimates and standard errors for each regression coefficient are pooled across
 studies using random-effects meta-analysis under maximum likelihood (ML),
-restricted maximum likelihood (REML) or fixed-effects meta-analysis (FE). Default FALSE.}
+restricted maximum likelihood (REML) or fixed-effects meta-analysis (FE). Default is FALSE.}
 
 \item{datasources}{a list of \code{\link{DSConnection-class}} objects obtained after login. 
 If the \code{datasources} argument is not specified
