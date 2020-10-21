@@ -82,7 +82,6 @@ test_that("simple test, checking coefficients of diagnostics", {
     
     # expect_equal(coxph_model_full$survival1$coefficients[1], 0.0387, tolerance = 0.0001)
     
-    #print(ds.ls())
     
 })
 
