@@ -166,22 +166,12 @@ ds.coxph.SLMA <- function(formula = NULL,
         control <- gsub(" ", "",    control, fixed = TRUE)
         control <- gsub("=", "lll", control, fixed = TRUE)
 	
-	# cat(control)
-	# cat("formulaforcontrol")
 	control <- stats::as.formula(control)   
    }	   
 	
 	
-   #cat(search.filter)
-   #cat("\n")
    calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
-   # calltext <- call("coxphSLMADS",search.filter=stats::as.formula(search.filter), dataName)
    
-   #cat("\n Class of calltext\n")
-   #cat(class(calltext))
-   #cat("\n What is in calltext ? \n")
-   #cat(as.character(calltext))
-
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
   
