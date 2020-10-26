@@ -16,7 +16,7 @@
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @return \code{SurvDS} returns to the client-side a Surv() obejct for use in
 #' the Cox proportional hazards model
-#' @author Soumya Banerjee, 2020
+#' @author Soumya Banerjee and Tom Bishop, 2020
 #' @examples
 #' \dontrun{
 #'
