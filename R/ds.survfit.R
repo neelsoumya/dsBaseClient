@@ -1,7 +1,8 @@
-#' @title Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model
-#' @description Creates a server side Survival fit (survfit) object and returns it 
-#' @details This is a function that plots results from survival analysis using the Cox 
-#' proportional hazards model. 
+#' @title Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model.
+#' @description Creates a server side Survival fit (survfit) object,
+#' @details This is a function that creates a server side survfit object.
+#'	This is to be used in plotting results from survival analysis using the Cox 
+#' 	proportional hazards model. 
 #' 
 #' Server function called: \code{survfitDS}. 
 #' 
@@ -62,7 +63,9 @@
 #' }
 #'
 #' @export
-ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
+ds.survfit <- function(formula = NULL, 
+		       objectname = NULL,
+		       datasources = NULL)
 {
    
    # look for DS connections
@@ -78,11 +81,6 @@ ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
       stop(" Please provide a valid formula for use in survival::survfit()", call.=FALSE)
    }
    
-   
-   # call the server side function
-   #cat("On client side: \n")
-   #cat("\n")
-
    # convert to type formula	
    formula = stats::as.formula(formula)
    
@@ -114,9 +112,9 @@ ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
    
    #cat("\n Class of calltext\n")
    #cat(class(calltext))
-   cat("\n What is in calltext ? \n")
-   cat(as.character(calltext))
-   cat("\n End of function \n")	
+   #cat("\n What is in calltext ? \n")
+   #cat(as.character(calltext))
+   #cat("\n End of function \n")	
 
    # call aggregate function
    # output <- datashield.aggregate(datasources, calltext)
@@ -126,9 +124,9 @@ ds.survfit <- function(formula = NULL, objectname = NULL, datasources = NULL)
    # output <- datashield.assign(conns = datasources, symbol = 'surv_object',
    #                             value = calltext)
    
-   #ds.assign(toAssign = 'D$female', newobj = 'E', datasources = connections)
+   # ds.assign(toAssign = 'D$female', newobj = 'E', datasources = connections)
    # ds.assign(toAssign = 'D$female', newobj = 'surv_object', datasources = datasources)
-   #ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
+   # ds.assign(toAssign = 'SurvDS(', newobj = 'surv_object', datasources = datasources)
    # return summary of coxph model
    # output <- NULL
    return(output)
