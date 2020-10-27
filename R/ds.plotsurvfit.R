@@ -170,7 +170,7 @@ ds.plotsurvfit <- function(formula = NULL,
    }	   
 	
 	
-   calltext <- call("coxphSLMADS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
+   calltext <- call("plotsurvfitDS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
    
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
