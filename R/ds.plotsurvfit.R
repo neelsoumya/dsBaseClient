@@ -114,61 +114,6 @@ ds.plotsurvfit <- function(formula = NULL,
       stop(" Please provide a valid survival formula!", call.=FALSE)
    }
    
-   
-   formula = stats::as.formula(formula)
-   
-   ####################################################################	
-   # Logic for parsing formula: since this need to be passed
-   #     to parser, we need to remove special symbols
-   #     On the server-side function (coxphSLMADS) this needs
-   #     to be reconstructed
-   #     formula as text, then split at pipes to avoid triggering parser
-   ####################################################################
-   formula <- Reduce(paste, deparse(formula))
-   formula <- gsub("survival::Surv(", "sssss", formula, fixed = TRUE)
-   formula <- gsub("|", "xxx", formula, fixed = TRUE)
-   formula <- gsub("(", "yyy", formula, fixed = TRUE)
-   formula <- gsub(")", "zzz", formula, fixed = TRUE)
-   formula <- gsub("/", "ppp", formula, fixed = TRUE)
-   formula <- gsub(":", "qqq", formula, fixed = TRUE)
-   formula <- gsub(",", "rrr", formula, fixed = TRUE)
-   formula <- gsub(" ", "",    formula, fixed = TRUE)
-   formula <- gsub("=", "lll", formula, fixed = TRUE)
-   # "survival::Surv(time=SURVTIME,event=EVENT)~D$female"
-   # gets converted to EVENTzzz ~ D$female
-   cat(formula)
-	
-   # convert to formula otherwise we get parser error
-   formula <- stats::as.formula(formula)
-   #formula <- strsplit(x = formurand()la, split="|", fixed=TRUE)[[1]]
-   
-   
-   ####################################################################
-   # Logic for parsing control argument
-   ####################################################################
-   if (!is.null(control))
-   {	
-        # everything needs to be passed as formula to server
-	#	otherwise will not go through parser
-	#	and a formula needs a ~ something
-	#	so introduce dummy ~ something and remove
-	#	it on server side   
-	control <- paste0(control, "~bbbb")  
-	   
-        control <- Reduce(paste, deparse(control))
-        control <- gsub("survival::coxph.control(", "aaaaa", control, fixed =  TRUE)
-        control <- gsub("|", "xxx", control, fixed = TRUE)
-        control <- gsub("(", "yyy", control, fixed = TRUE)
-        control <- gsub(")", "zzz", control, fixed = TRUE)
-        control <- gsub("/", "ppp", control, fixed = TRUE)
-        control <- gsub(":", "qqq", control, fixed = TRUE)
-	control <- gsub(",", "rrr", control, fixed = TRUE)
-        control <- gsub(" ", "",    control, fixed = TRUE)
-        control <- gsub("=", "lll", control, fixed = TRUE)
-	
-	control <- stats::as.formula(control)   
-   }	   
-	
 	
    calltext <- call("plotsurvfitDS", formula=formula, dataName, weights, init, ties, singular.ok, model, x, y, control)
    
