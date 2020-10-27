@@ -80,7 +80,7 @@
 #' }
 #'
 #' @export
-ds.coxph.SLMA <- function(formula = NULL,
+ds.plotsurvfit <- function(formula = NULL,
 			  dataName = NULL,
 			  weights = NULL,
 			  init = NULL,
@@ -175,86 +175,9 @@ ds.coxph.SLMA <- function(formula = NULL,
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
   
-   # return summary of coxph model
-   if (combine_with_metafor == FALSE)
-   {	   
-       # do not combine with metafor return summary of Cox model	   
-       return(output)
-   }
-   else
-   {
-       ###############################	   
-       # combine with metafor
-       ###############################
-
-       # get number of studies
-       numstudies <- length(datasources)
-
-       # get the max number of coefficients in model
-       # numcoefficients <- length( output[[1]]$coefficients[,1] )
-       # create a variable to store max number of coefficients	   
-       numcoefficients_max <- 0
-  
-       # for each study find out the number of coefficients and then get max	   
-       for (g in 1:numstudies)
-       {
-	   # if the number of coefficients in the g th study is greater than max,
-	   #     then make it the new max    
-           if (length(output[[g]]$coefficients[,1]) > numcoefficients_max)
-	   {
-               numcoefficients_max <- length(output[[g]]$coefficients[,1])
-           }
-       }	   
-
-       # assign this max number of coefficients to the variable numcoefficients
-       numcoefficients <- numcoefficients_max	   
-	   
-       # initialize matrices to store coefficient values and standard errors
-       betamatrix <- matrix(NA, nrow = numcoefficients, ncol = numstudies)
-       sematrix   <- matrix(NA, nrow = numcoefficients, ncol = numstudies)	   
-	   
-       # for each study store these values
-       for (k in 1:numstudies)
-       {
-           betamatrix[,k] <- output[[k]]$coefficients[,1]
-           sematrix[,k]   <- output[[k]]$coefficients[,2]
-       }
-	   
-       # create a list to store all RMA metafor values
-       SLMA.pooled.ests.matrix <- matrix(NA, nrow = numcoefficients, ncol = 6)
-       # create meaningful column names	   
-       dimnames(SLMA.pooled.ests.matrix) <- list(dimnames(betamatrix)[[1]],
-                                                 c("pooled.ML","se.ML","pooled.REML","se.REML","pooled.FE","se.FE")
-					         )
-       
-       # call metafor::rma() for each study and call with ML, REML and FE options
-       for(p in 1:numcoefficients)
-       {
-           rma.ML  <- metafor::rma(yi = as.matrix(betamatrix)[p,], sei = as.matrix(sematrix)[p,], method = "ML")
-           rma.REML<- metafor::rma(yi = as.matrix(betamatrix)[p,], sei = as.matrix(sematrix)[p,], method = "REML")
-           rma.FE  <- metafor::rma(yi = as.matrix(betamatrix)[p,], sei = as.matrix(sematrix)[p,], method = "FE")
-    
-           SLMA.pooled.ests.matrix[p,1] <- rma.ML$beta
-           SLMA.pooled.ests.matrix[p,2] <- rma.ML$se
-    
-           SLMA.pooled.ests.matrix[p,3] <- rma.REML$beta
-           SLMA.pooled.ests.matrix[p,4] <- rma.REML$se
-    
-           SLMA.pooled.ests.matrix[p,5] <- rma.FE$beta
-           SLMA.pooled.ests.matrix[p,6] <- rma.FE$se
-       }	   
-	
-       # return this SLMA pooled metafor::rma() list
-       return (list(output = output,
-		    betamatrix = betamatrix,
-		    sematrix = sematrix,
-		    SLMA.pooled.ests.matrix = SLMA.pooled.ests.matrix
-		   )
-	      )
-	   
-   }	   
-
+   # graphics::plot(output)	
+   return(output)
 	
 }
-#ds.coxph.SLMA
+#ds.plotsurvfit
 
