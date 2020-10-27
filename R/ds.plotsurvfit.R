@@ -120,7 +120,8 @@ ds.plotsurvfit <- function(formula = NULL,
    # call aggregate function
    output <- datashield.aggregate(datasources, calltext)
   
-   # graphics::plot(output)	
+   graphics::plot(output, main = 'Survival curve of anonymized data')	
+   
    return(output)
 	
 }
