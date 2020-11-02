@@ -1,13 +1,11 @@
-#' @title Performs survival analysis using Cox proportional hazards model
-#' @description Passes a formula to a server side environment and returns the summary of 
-#' Cox proportional hazards model from the server. 
-#' @details This is a function that performs survival analysis using the Cox 
-#' proportional hazards model. 
+#' @title Performs plotting of privacy preserving survival curves. 
+#' @description PPerforms plotting of privacy preserving survival curves. 
+#' @details This is a function that Performs plotting of privacy preserving survival curves.
 #' 
-#' Server function called: \code{coxphSLMADS}. 
+#' Server function called: \code{plotsurvfitDS}. 
 #' 
-#' @param formula character string (potentially including \code{*} symbol without spaces) 
-#' specifying the formula that you want to pass to the server-side.
+#' @param formula character string  
+#' 	specifying the name of survfit object on the server-side created using ds.survfit().
 #' For more information see \strong{Details}. 
 #' @param dataName character string of name of data frame
 #' @param weights vector of case weights
