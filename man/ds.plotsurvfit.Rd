@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds.plotsurvfit.R
 \name{ds.plotsurvfit}
 \alias{ds.plotsurvfit}
-\title{Performs survival analysis using Cox proportional hazards model}
+\title{Performs plotting of privacy preserving survival curves.}
 \usage{
 ds.plotsurvfit(
   formula = NULL,
@@ -20,8 +20,8 @@ ds.plotsurvfit(
 )
 }
 \arguments{
-\item{formula}{character string (potentially including \code{*} symbol without spaces) 
-specifying the formula that you want to pass to the server-side.
+\item{formula}{character string
+    specifying the name of survfit object on the server-side created using ds.survfit().
 For more information see \strong{Details}.}
 
 \item{dataName}{character string of name of data frame}
@@ -61,14 +61,12 @@ the default set of connections will be used: see \code{\link{datashield.connecti
 the Cox proportional hazards model
 }
 \description{
-Passes a formula to a server side environment and returns the summary of 
-Cox proportional hazards model from the server.
+PPerforms plotting of privacy preserving survival curves.
 }
 \details{
-This is a function that performs survival analysis using the Cox 
-proportional hazards model. 
+This is a function that Performs plotting of privacy preserving survival curves.
 
-Server function called: \code{coxphSLMADS}.
+Server function called: \code{plotsurvfitDS}.
 }
 \examples{
 \dontrun{

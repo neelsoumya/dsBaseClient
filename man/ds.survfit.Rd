@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds.survfit.R
 \name{ds.survfit}
 \alias{ds.survfit}
-\title{Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model}
+\title{Creates a server-side Survival fit (survfit) object for use in Cox proportional hazards model.}
 \usage{
 ds.survfit(formula = NULL, objectname = NULL, datasources = NULL)
 }
@@ -23,11 +23,12 @@ the default set of connections will be used: see \code{\link{datashield.connecti
 the Cox proportional hazards model
 }
 \description{
-Creates a server side Survival fit (survfit) object and returns it
+Creates a server side Survival fit (survfit) object,
 }
 \details{
-This is a function that plots results from survival analysis using the Cox 
-proportional hazards model. 
+This is a function that creates a server side survfit object.
+This is to be used in plotting results from survival analysis using the Cox 
+	proportional hazards model. 
 
 Server function called: \code{survfitDS}.
 }
@@ -78,5 +79,5 @@ Server function called: \code{survfitDS}.
 
 }
 \author{
-Soumya Banerjee, 2020
+Soumya Banerjee and Tom Bishop, 2020
 }
