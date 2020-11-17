@@ -3,8 +3,6 @@ dsBaseClient
 
 DataSHIELD client side base R library.
 
-test functions branch
-
 
 
 
