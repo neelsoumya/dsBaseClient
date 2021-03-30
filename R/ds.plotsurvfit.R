@@ -123,7 +123,7 @@ ds.plotsurvfit <- function(formula = NULL,
    #	https://www.rdocumentation.org/packages/survival/versions/3.2-7/topics/plot.survfit
    fun = NULL
    
-   if (fun == NULL)
+   if (is.null(fun))
    {	   
        graphics::plot(output$study1, main = 'Survival curve of anonymized data')	
    }
