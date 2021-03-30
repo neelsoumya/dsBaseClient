@@ -119,8 +119,19 @@ ds.plotsurvfit <- function(formula = NULL,
    output <- datashield.aggregate(datasources, calltext)
   
    # TODO: do for each study by using colnames which will have study1 etc	
-   graphics::plot(output$study1, main = 'Survival curve of anonymized data')	
+   # TODO: other arguments like fun
+   #	https://www.rdocumentation.org/packages/survival/versions/3.2-7/topics/plot.survfit
+   fun = NULL
    
+   if (fun == NULL)
+   {	   
+       graphics::plot(output$study1, main = 'Survival curve of anonymized data')	
+   }
+   else
+   {
+       graphics::plot(output$study1, main = 'Survival curve of anonymized data', fun = fun)	   
+   }	   
+	   
    return(output)
 	
 }
