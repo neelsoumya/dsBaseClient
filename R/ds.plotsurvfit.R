@@ -30,7 +30,7 @@
 #' the default set of connections will be used: see \code{\link{datashield.connections_default}}.
 #' @return \code{coxphSLMADS} returns to the client-side a summary of 
 #' the Cox proportional hazards model
-#' @author Soumya Banerjee and Tom Bishop, 2020
+#' @author Soumya Banerjee, Tom Bishop, Demetris Avraam, Paul Burton and DataSHIELD technical team (2021).
 #' @examples
 #' \dontrun{
 #'
